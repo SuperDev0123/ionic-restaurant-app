@@ -1,0 +1,6 @@
+{
+  "appId": "io.showzone.app",
+  "appName": "ShowZone",
+  "webDir": "out",
+  "bundledWebRuntime": false
+}

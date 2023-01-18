@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@features/*": ["features/*"],
+      "@public/*": ["public/*"],
+      "@useAuth": ["features/auth/hooks/useAuth.js"],
+    }
+  }
+}

@@ -1,0 +1,588 @@
+$din: "din-2014";
+$teko: "teko";
+$montserrat: "montserrat";
+$blue-text: #93a6f1;
+
+@font-face {
+  font-family: "montserrat";
+  src: url("/fonts/montserrat.bold.woff2") format("woff2"),
+    url("/fonts/montserrat.bold.woff") format("woff");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "din-2014";
+  src: url("/fonts/din-2014.woff2") format("woff2"),
+    url("/fonts/din-2014.woff") format("woff");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "din-2014";
+  src: url("/fonts/din-2014-bold.woff2") format("woff2"),
+    url("/fonts/din-2014-bold.woff") format("woff");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "teko";
+  src: url("/fonts/teko.woff2") format("woff2"),
+    url("/fonts/teko.woff") format("woff");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Road Rage';
+  src: url('/fonts/RoadRage.eot');
+  src: url('/fonts/RoadRage.eot?#iefix') format('embedded-opentype'),
+      url('/fonts/RoadRage.woff2') format('woff2'),
+      url('/fonts/RoadRage.woff') format('woff'),
+      url('/fonts/RoadRage.ttf') format('truetype'),
+      url('/fonts/RoadRage.svg#RoadRage') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Boss';
+  src: url('/fonts/Boss.eot');
+  src: url('/fonts/Boss.eot?#iefix') format('embedded-opentype'),
+      url('/fonts/Boss.woff2') format('woff2'),
+      url('/fonts/Boss.woff') format('woff'),
+      url('/fonts/Boss.ttf') format('truetype'),
+      url('/fonts/Boss.svg#Boss') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.card-preview-container {
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: scroll;
+}
+
+.card-preview.pro-diamond {
+  background: url("/images/card-builder-batter-pro-diamond.jpg");
+  .pitcher & {
+    background: url("/images/card-builder-pitcher-pro-diamond.jpg");
+  }
+}
+
+.card-preview {
+  color: #fff;
+  width: 1200px;
+  height: 675px;
+  background: url("/images/card-builder-batter.jpg");
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  font-family: $din;
+  margin-bottom: 3rem;
+  .pitcher & {
+    background: url("/images/card-builder-pitcher.jpg");
+  }
+
+  .first-name {
+    position: absolute;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    left: 245px;
+    top: 53px;
+  }
+
+  .pitchShortNames {
+    position: absolute;
+    left: 583px;
+    top: 135px;
+    font-size: 22px;
+    font-family: $din;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .last-name {
+    position: absolute;
+    font-size: 23px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    left: 245px;
+    top: 75px;
+    font-family: $din;
+    font-weight: 700;
+  }
+
+  .number {
+    position: absolute;
+    color: $blue-text;
+    font-size: 13px;
+    font-family: $din;
+    font-weight: 700;
+    text-transform: capitalize;
+    text-align: center;
+    left: 243px;
+    top: 106px;
+    span {
+        margin-right: .25rem;
+    }
+  }
+
+  .position {
+    position: absolute;
+    font-size: 12px;
+    font-family: $din;
+    text-transform: uppercase;
+    text-align: center;
+    left: 266px;
+    top: 108px;
+    font-weight: 700;
+  }
+
+  .secondary-position {
+    position: absolute;
+    font-size: 22px;
+    font-family: $din;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    left: 578px;
+    top: 135px;
+  }
+
+  .overall-rating {
+    position: absolute;
+    font-size: 22px;
+    font-family: $din;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    left: 243px;
+    top: 135px;
+    img {
+      width: 27px;
+      margin-left: 1px;
+      margin-top: 2px;
+    }
+  }
+
+  .bats {
+    position: absolute;
+    font-size: 22px;
+    font-family: $din;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    left: 356px;
+    top: 135px;
+  }
+
+  .throws {
+    position: absolute;
+    font-size: 22px;
+    font-family: $din;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    left: 469px;
+    top: 135px;
+  }
+
+  .weight {
+    position: absolute;
+    font-size: 22px;
+    font-family: $din;
+    font-weight: 700;
+    text-transform: none;
+    left: 243px;
+    top: 180px;
+  }
+
+  .height {
+    position: absolute;
+    font-size: 22px;
+    font-family: $din;
+    font-weight: 700;
+    text-transform: none;
+    left: 354px;
+    top: 180px;
+  }
+
+  .age {
+    position: absolute;
+    font-size: 22px;
+    font-family: $din;
+    font-weight: 700;
+    text-transform: none;
+    left: 469px;
+    top: 180px;
+  }
+
+  .born {
+    position: absolute;
+    font-size: 22px;
+    font-family: $din;
+    font-weight: 700;
+    text-transform: none;
+    left: 581px;
+    top: 180px;
+  }
+}
+
+.card-inputs {
+  margin-bottom: 2rem;
+  .card-input-section {
+    margin-bottom: 2rem;
+    background: #eee;
+    padding: 1.5rem;
+  }
+  button {
+    margin-right: 1rem;
+  }
+  .upload-button {
+    margin-top: 1rem;
+  }
+  hr {
+    margin: 2.25rem 0 1.75rem;
+  }
+}
+
+.statContainer {
+  font-weight: bold;
+  position: absolute;
+  bottom: 92px;
+  text-align: center;
+  font-family: "din-2014";
+  height: 192px;
+  font-size: 1rem;
+  text-align: center;
+  width: 19px;
+  display: flex;
+  justify-content: center;
+}
+
+.stat {
+  position: absolute;
+  background: #575757 !important;
+  width: 10px;
+  border-radius: 50px;
+  height: 167px;
+  bottom: 0;
+  overflow: hidden;
+  .statBar {
+    width: 10px;
+    position: absolute;
+    bottom: 0;
+    border-radius: 50px;
+  }
+}
+
+.battingStat {
+  .statBar {
+    background: #ffc600;
+  }
+  .pitcher & {
+    display: none;
+  }
+}
+
+.fieldingStat {
+  .statBar {
+    background: #00de61;
+    .pitcher & {
+      background: #00de61;
+    }
+  }
+}
+
+.baserunningStat {
+  .statBar {
+    background: #008aff;
+  }
+  .pitcher & {
+    display: none;
+  }
+}
+
+.pitchingStat {
+  .statBar {
+    background: #fc3833;
+  }
+  .batter & {
+    display: none;
+  }
+}
+
+.contactR {
+  left: 69px;
+}
+
+.contactL {
+  left: 134px;
+}
+
+.powerR {
+  left: 198px;
+}
+
+.powerL {
+  left: 262px;
+}
+
+.vision {
+  left: 324px;
+}
+
+.discipline {
+  left: 389px;
+}
+
+.clutch {
+  left: 452px;
+}
+
+.bunt {
+  left: 515px;
+}
+
+.dragBunt {
+  left: 580px;
+}
+
+.durability {
+  left: 643px;
+}
+
+.fielding {
+  left: 707px;
+  .pitcher & {
+    left: 830px;
+  }
+}
+
+.arm {
+  left: 771px;
+  .pitcher & {
+    left: 910px;
+  }
+}
+
+.accuracy {
+  left: 834px;
+  .pitcher & {
+    left: 990px;
+  }
+}
+
+.reaction {
+  left: 897px;
+  .pitcher & {
+    left: 1070px;
+  }
+}
+
+.speed {
+  left: 962px;
+}
+
+.steal {
+  left: 1023px;
+}
+
+.brAgg {
+  left: 1087px;
+}
+
+.stamina {
+  left: 110px;
+}
+
+.h9 {
+  left: 190px;
+}
+
+.k9 {
+  left: 270px;
+}
+
+.bb9 {
+  left: 350px;
+}
+
+.hr9 {
+  left: 430px;
+}
+
+.pclt {
+  left: 510px;
+}
+
+.control {
+  left: 590px;
+}
+
+.velocity {
+  left: 670px;
+}
+
+.break {
+  left: 750px;
+}
+
+.card-image {
+  position: absolute;
+  width: 176px;
+  height: 248px;
+  left: 31px;
+  top: 33px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  .card-rating {
+    position: absolute;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 18px;
+    text-shadow: 1px 1px #000;
+    background-position: center center;
+    background-size: contain;
+    background-position: center center;
+    color: #fff;
+    right: 5px;
+    top: 3px;
+    width: 39px;
+    height: 39px;
+    padding-bottom: 2px;
+  }
+  .art-type {
+    position: absolute;
+    &.prime,
+    &.live-series {
+      bottom: 0;
+      height: 246px;
+      width: 174px;
+    }
+    &.second-half,
+    &.allstar,
+    &.breakout,
+    &.postseason,
+    &.rookie,
+    &.veteran {
+      right: 0;
+      top: 0;
+      height: 165px;
+    }
+  }
+  .card-year {
+    color: #000;
+    position: absolute;
+    font-family: $montserrat;
+    font-weight: bold;
+    font-size: 12px;
+    right: -3px;
+    top: 120px;
+    transform: rotate(-90deg);
+  }
+  .live-series-info {
+    font-family: $teko;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 55px;
+    color: #fff;
+    .player-first-name {
+      position: absolute;
+      top: 2px;
+      left: 43px;
+    }
+    .player-last-name {
+      position: absolute;
+      color: #000;
+      top: 16px;
+      left: 15px;
+    }
+    .player-position {
+      position: absolute;
+      top: 32px;
+      left: 5px;
+      font-size: 12px;
+    }
+    .player-hands {
+      position: absolute;
+      top: 32px;
+      left: 25px;
+      font-size: 12px;
+    }
+  }
+}
+
+.fielding-sheild {
+  position: absolute;
+  right: 141px;
+  top: 141px;
+  width: 60px;
+}
+
+.hitting-sheild {
+  position: absolute;
+  right: 254px;
+  top: 141px;
+  width: 60px;
+}
+
+.pitchStats {
+  position: absolute;
+  left: 860px;
+  top: 161px;
+
+  .pitch {
+    color: $blue-text;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    font-size: 14px;
+    margin-top: 1px;
+    font-weight: bold;
+    .pitchStat {
+      position: relative;
+      height: 10px;
+      width: 120px;
+      background: #575757;
+      border-radius: 25px;
+      left: 10px;
+      .pitchStatBar {
+        width: 0;
+        height: 10px;
+        background: url("/images/bg-pitchstat.jpg");
+        background-position: left;
+        background-repeat: no-repeat;
+        border-radius: 25px;
+      }
+    }
+    .pitchInfo {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .pitchSpeed {
+        color: #fff;
+        margin-left: 2rem;
+        width: 42px;
+      }
+    }
+  }
+}
