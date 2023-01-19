@@ -47,26 +47,6 @@ function HomePage() {
 
   return (
     <>
-      <Head>
-        <title>MLB The Show Tools & Resources - ShowZone</title>
-        <meta
-          name="description"
-          content="MLB The Show player database, team builder, flipping tools, card builder, advanced data powered by AI and so much more."
-        />
-        <meta
-          property="og:title"
-          content="MLB The Show Tools & Resources - ShowZone"
-          key="ogtitle"
-        />
-        <meta
-          property="og:image"
-          content={getOGUrl("default", {
-            title: "Tools & Resources for MLB The Show Gamers",
-            smallText: "Step Up Your Game",
-          })}
-          key="ogimage"
-        />
-      </Head>
       <HomepageBanner />
       <Grid container spacing={12} justifyContent="space-between">
         <Grid item xs justify="space-between">
