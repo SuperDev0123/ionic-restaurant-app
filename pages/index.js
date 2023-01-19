@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react"
 import { styled, spacing } from "@mui/system"
 import Grid from "@mui/material/Grid"
 import Head from "next/head"
@@ -8,10 +9,42 @@ import HomepageBanner from "@components/Banners/HomepageBanner"
 import ToolsResourcesButtons from "@components/Buttons/ToolsResourcesButtons"
 import TrueOverallSlider from "@components/PlayerSliders/TrueOverallSlider"
 import { getOGUrl } from "../features/og-image/utils"
+import { CapacitorHttp } from "@capacitor/core"
+import Skeleton from "@mui/material/Skeleton"
 
 const Spacer = styled("div")(spacing)
 
 function HomePage() {
+  const [homeplatePosts, setHomeplatePosts] = useState("")
+  const [topPlayers, setTopPlayers] = useState("")
+  const [loadingPosts, setLoadingPosts] = useState(false)
+  const [loadingTopPlayers, setLoadingTopPlayers] = useState(false)
+
+  const getHomeplatePosts = async () => {
+    setLoadingPosts(true)
+    let options = {
+      url: "https://content.showzone.io/wp-json/wp/v2/posts?per_page=6&tags=2",
+    }
+    const response = await CapacitorHttp.request({ ...options, method: 'GET' })
+    setHomeplatePosts(response.data)
+    setLoadingPosts(false)
+  }
+
+  const getTopPlayers = async () => {
+    setLoadingTopPlayers(true)
+    let options = {
+      url: "https://api.showzone.io/api/player-profiles/?game=MLB The Show 22&order_by=desc playerprofileadvanced__overall_true",
+    }
+    const response = await CapacitorHttp.request({ ...options, method: 'GET' })
+    setTopPlayers(response.data.results)
+    setLoadingTopPlayers(false)
+  }
+
+  useEffect(() => {
+    getHomeplatePosts()
+    getTopPlayers()
+  }, [])
+
   return (
     <>
       <Head>
@@ -20,7 +53,11 @@ function HomePage() {
           name="description"
           content="MLB The Show player database, team builder, flipping tools, card builder, advanced data powered by AI and so much more."
         />
-        <meta property="og:title" content="MLB The Show Tools & Resources - ShowZone" key="ogtitle" />
+        <meta
+          property="og:title"
+          content="MLB The Show Tools & Resources - ShowZone"
+          key="ogtitle"
+        />
         <meta
           property="og:image"
           content={getOGUrl("default", {
@@ -42,6 +79,16 @@ function HomePage() {
               />
             </Grid>
           </Grid>
+          {loadingPosts ? (
+            <Skeleton
+              animation="wave"
+              variant="rectangular"
+              width={"100%"}
+              height={300}
+            />
+          ) : (
+            <Posts posts={homeplatePosts} />
+          )}
 
           <Spacer mb={20} />
 
@@ -56,6 +103,7 @@ function HomePage() {
               />
             </Grid>
           </Grid>
+          <ToolsResourcesButtons />
 
           <Spacer mb={20} />
 
@@ -68,6 +116,16 @@ function HomePage() {
               />
             </Grid>
           </Grid>
+          {loadingTopPlayers ? (
+            <Skeleton
+              animation="wave"
+              variant="rectangular"
+              width={"100%"}
+              height={300}
+            />
+          ) : (
+            <TrueOverallSlider players={topPlayers} />
+          )}
           <Spacer mb={20} />
         </Grid>
       </Grid>
