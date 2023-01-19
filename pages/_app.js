@@ -13,6 +13,7 @@ import { NotificationProvider } from "../features/notifications/NotificationCont
 import { PlaywireScript } from "../features/ads/playwire/PlaywireScript";
 import { SnackbarProvider } from 'notistack';
 import { oswald } from "../features/theme/font";
+
 import '../styles/styles.css'
 
 const previewImage = "/images/preview-image.jpg"
