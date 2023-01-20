@@ -1,9 +1,9 @@
-This is the new version of https://showzone.io.
-
-The development version is deployed to https://showzone-web-next-dev.herokuapp.com.
+## Create Mobile Apps
+npm run static
+npm cap sync
+npm open ios / npm open android
 
 ## Getting Started
-
 First, run the development server:
  
 ```bash
@@ -14,4 +14,4 @@ yarn dev
 
 Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+
