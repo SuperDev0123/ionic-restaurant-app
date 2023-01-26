@@ -13,7 +13,7 @@ const AppShell = () => {
       <Route exact path="/" render={() =><HomePage/>} />
       <Route exact path="/login" render={() =><SignInForm/>} />
       <Route exact path="/profile" render={() =><HomePage/>} />
-          <Route exact path="/contact" render={() => <ContactPage />} />
+      <Route exact path="/contact" render={() => <ContactPage />} />
     </Router>
           
           
