@@ -47,7 +47,7 @@ function MyApp(props) {
               font-family: ${oswald.style.fontFamily};
             }
           `}</style>
-          <SnackbarProvider 
+          <SnackbarProvider
             maxSnack={18}
             preventDuplicate
             hideIconVariant
@@ -55,12 +55,12 @@ function MyApp(props) {
               vertical: 'top',
               horizontal: 'right',
             }}>
-              <NotificationProvider>
-            <PlaywireScript />
-            
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <NotificationProvider>
+              <PlaywireScript />
+
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
             </NotificationProvider>
           </SnackbarProvider>
           

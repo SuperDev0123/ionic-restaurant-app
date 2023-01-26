@@ -24,10 +24,11 @@ import NavbarUserDropdown from "./NavbarUserDropdown"
 import NavBarMainMenu from "./NavBarMainMenu"
 // import AdBlock from "@components/AdBlock"
 import dashboardItems from "../Sidebar/dashboardItems"
-
+import { Box } from "@mui/material"
 const AppBar = styled(MuiAppBar)`
   color: ${props => props.theme.header.color};
   border-top: 5px solid ${props => props.theme.palette.primary.main};
+  margin-top: 28px;
 `
 
 const IconButton = styled(MuiIconButton)`
@@ -36,6 +37,13 @@ const IconButton = styled(MuiIconButton)`
     height: 22px;
   }
 `
+const Header = styled(Box)({
+    height: "50px",
+    width: "100%",
+    backgroundColor: "#ed2024",
+    zIndex: 1100,
+})
+
 const Brand = styled(ListItemButton)`
   font-size: ${props => props.theme.typography.h5.fontSize};
   font-weight: ${props => props.theme.typography.fontWeightMedium};
@@ -71,6 +79,7 @@ const Navbar = ({ onDrawerToggle }) => {
 
   return (
     <React.Fragment>
+      <Header position="fixed" elevation={0}></Header>
       <AppBar position="fixed" elevation={0}>
         <Toolbar>
           <Grid container alignItems="center">
