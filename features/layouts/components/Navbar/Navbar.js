@@ -31,6 +31,8 @@ const AppBar = styled(MuiAppBar)`
   padding-top: env(safe-area-inset-top);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-right);
+
 `
 
 const IconButton = styled(MuiIconButton)`

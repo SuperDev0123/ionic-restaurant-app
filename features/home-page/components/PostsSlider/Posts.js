@@ -41,7 +41,7 @@ const Posts = ({ posts, small }) => {
     <Styles>
       <Grid container spacing={6}>
         <Grid item xs justify="space-between">
-          {posts.length > 0 ? (
+          {posts && posts.length > 0 ? (
             <Swiper
               watchSlidesProgress={true}
               slidesPerView={"auto"}
@@ -80,7 +80,7 @@ const Posts = ({ posts, small }) => {
               ))}
             </Swiper>
           ) : (
-            ""
+            <></>
           )}
         </Grid>
       </Grid>
