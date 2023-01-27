@@ -4,8 +4,10 @@ import domtoimage from "dom-to-image"
 import { saveAs } from "file-saver"
 import Button from "@components/Buttons/Button"
 import { styled, spacing } from "@mui/system"
-var slugify = require('slugify')
+var slugify = require("slugify")
 import {
+  Card,
+  CardContent,
   FormHelperText,
   FormControlLabel,
   Switch,
@@ -20,7 +22,11 @@ import {
   FormControl,
   InputLabel,
   TextField,
+  Tabs,
+  Tab,
 } from "@mui/material"
+import TabPanel from "@mui/lab/TabPanel"
+import TabContext from "@mui/lab/TabContext"
 
 import useAuth from "@useAuth"
 
@@ -39,7 +45,6 @@ const frameVeteran = "../../images/frame-veteran.png"
 const frameSecondHalf = "../../images/frame-second-half.png"
 const batterPreview = "../../images/card-builder-batter.jpg"
 const pitcherPreview = "../../images/card-builder-pitcher.jpg"
-
 
 const Typography = styled(MuiTypography)(spacing)
 const Divider = styled(MuiDivider)(spacing)
@@ -62,301 +67,303 @@ const CardBuilder = () => {
   const [bats, setBats] = useState(null)
   const [throws, setThrows] = useState(null)
   const [cardSeries, setCardSeries] = useState(null)
+  const [tab, setTab] = React.useState("1")
+
+  const handleChange = (event, newValue) => {
+    setTab(newValue)
+  }
   // check params
   useEffect(() => {
-    const queryString = window.location.search;
-    var urlParams =  new URLSearchParams(queryString);
+    const queryString = window.location.search
+    var urlParams = new URLSearchParams(queryString)
 
-    urlParams.forEach(function(value, key) {
+    urlParams.forEach(function (value, key) {
       // last thing to do - share to card builder
-      if(key === 'team') {
+      if (key === "team") {
         setTeam(value)
       }
-      if(key === 'jersey_number') {
+      if (key === "jersey_number") {
         key = "number"
       }
-      if(key === 'pitch_1') {
+      if (key === "pitch_1") {
         key = "pitch1"
         setPitch1(value)
       }
-      if(key === 'pitch_2') {
+      if (key === "pitch_2") {
         key = "pitch2"
         setPitch2(value)
       }
-      if(key === 'pitch_3') {
+      if (key === "pitch_3") {
         key = "pitch3"
         setPitch3(value)
       }
-      if(key === 'pitch_4') {
+      if (key === "pitch_4") {
         key = "pitch4"
         setPitch4(value)
       }
-      if(key === 'pitch_5') {
+      if (key === "pitch_5") {
         key = "pitch5"
         setPitch5(value)
       }
-      
-      if(key === 'display_secondary_positions_string') {
-        key = 'secondaryPosition'
+
+      if (key === "display_secondary_positions_string") {
+        key = "secondaryPosition"
       }
-      if(key === "pitch_1_speed") {
-        key = 'pitch1Speed'
+      if (key === "pitch_1_speed") {
+        key = "pitch1Speed"
       }
-      if(key === "pitch_2_speed") {
-        key = 'pitch2Speed'
+      if (key === "pitch_2_speed") {
+        key = "pitch2Speed"
       }
-      if(key === "pitch_3_speed") {
-        key = 'pitch3Speed'
+      if (key === "pitch_3_speed") {
+        key = "pitch3Speed"
       }
-      if(key === "pitch_4_speed") {
-        key = 'pitch4Speed'
+      if (key === "pitch_4_speed") {
+        key = "pitch4Speed"
       }
-      if(key === "pitch_5_speed") {
-        key = 'pitch5Speed'
+      if (key === "pitch_5_speed") {
+        key = "pitch5Speed"
       }
-      if(key === 'overall') {
+      if (key === "overall") {
         key = "overallRating"
       }
-      if(key === 'bat_hand') {
-        key = 'bats'
+      if (key === "bat_hand") {
+        key = "bats"
         setBats(value)
       }
-      if(key === 'throw_hand') {
-        key = 'throws'
+      if (key === "throw_hand") {
+        key = "throws"
         setThrows(value)
       }
-      if(key === 'series') {
-        key = 'cardSeries'
+      if (key === "series") {
+        key = "cardSeries"
         value = slugify(value).toLowerCase()
         setCardSeries(value)
       }
-      if(key === 'hitting_rank') {
-        key = 'hittingShield'
+      if (key === "hitting_rank") {
+        key = "hittingShield"
         value = value.toLowerCase()
       }
-      if(key === 'fielding_rank') {
-        key = 'fieldingShield'
+      if (key === "fielding_rank") {
+        key = "fieldingShield"
         value = value.toLowerCase()
       }
-      if(key === 'contact_right') {
-        key = 'contactR'
+      if (key === "contact_right") {
+        key = "contactR"
       }
-      if(key === 'contact_left') {
-        key = 'contactL'
+      if (key === "contact_left") {
+        key = "contactL"
       }
-      if(key === 'power_right') {
-        key = 'powerR'
+      if (key === "power_right") {
+        key = "powerR"
       }
-      if(key === 'power_left') {
-        key = 'powerL'
+      if (key === "power_left") {
+        key = "powerL"
       }
-      if(key === 'plate_vision') {
-        key = 'vision'
+      if (key === "plate_vision") {
+        key = "vision"
       }
-      if(key === 'plate_discipline') {
-        key = 'discipline'
+      if (key === "plate_discipline") {
+        key = "discipline"
       }
-      if(key === 'batting_clutch') {
-        key = 'clutch'
+      if (key === "batting_clutch") {
+        key = "clutch"
       }
-      if(key === 'bunting_ability') {
-        key = 'bunt'
+      if (key === "bunting_ability") {
+        key = "bunt"
       }
-      if(key === 'drag_bunting_ability') {
-        key = 'dragBunt'
+      if (key === "drag_bunting_ability") {
+        key = "dragBunt"
       }
-      if(key === 'hitting_durability') {
-        key = 'durability'
+      if (key === "hitting_durability") {
+        key = "durability"
       }
-      if(key === 'fielding_ability') {
-        key = 'fielding'
+      if (key === "fielding_ability") {
+        key = "fielding"
       }
-      if(key === 'arm_strength') {
-        key = 'arm'
+      if (key === "arm_strength") {
+        key = "arm"
       }
-      if(key === 'arm_accuracy') {
-        key = 'accuracy'
+      if (key === "arm_accuracy") {
+        key = "accuracy"
       }
-      if(key === 'reaction_time') {
-        key = 'reaction'
+      if (key === "reaction_time") {
+        key = "reaction"
       }
-      if(key === 'baserunning_ability') {
-        key = 'steal'
+      if (key === "baserunning_ability") {
+        key = "steal"
       }
-      if(key === 'baserunning_aggression') {
-        key = 'brAgg'
+      if (key === "baserunning_aggression") {
+        key = "brAgg"
       }
-      if(key === 'hits_per_bf') {
-        key = 'h9'
+      if (key === "hits_per_bf") {
+        key = "h9"
       }
-      if(key === 'k_per_bf') {
-        key = 'k9'
+      if (key === "k_per_bf") {
+        key = "k9"
       }
-      if(key === 'bb_per_bf') {
-        key = 'bb9'
+      if (key === "bb_per_bf") {
+        key = "bb9"
       }
-      if(key === 'hr_per_bf') {
-        key = 'hr9'
+      if (key === "hr_per_bf") {
+        key = "hr9"
       }
-      if(key === 'pitching_clutch') {
-        key = 'pclt'
+      if (key === "pitching_clutch") {
+        key = "pclt"
       }
-      if(key === 'pitch_control') {
-        key = 'control'
+      if (key === "pitch_control") {
+        key = "control"
       }
-      if(key === 'pitch_velocity') {
-        key = 'velocity'
+      if (key === "pitch_velocity") {
+        key = "velocity"
       }
-      if(key === 'pitch_movement') {
-        key = 'break'
+      if (key === "pitch_movement") {
+        key = "break"
       }
-      if(key === 'weight') {
-        key = 'weight'
-        value = value.split(' ')[0]
+      if (key === "weight") {
+        key = "weight"
+        value = value.split(" ")[0]
       }
-      
-      if(key === 'img') {
+
+      if (key === "img") {
         setCardImage(value)
       }
-      
-
-
 
       var event = {
         target: {
           name: key,
-          value: value
-        }
+          value: value,
+        },
       }
 
       updateCard(event)
 
-      if(key === 'display_position') {
-        key = 'cardType'
-        if(value === 'SP' || value === 'RP' || value === 'CP') {          
+      if (key === "display_position") {
+        key = "cardType"
+        if (value === "SP" || value === "RP" || value === "CP") {
           updateCard({
             target: {
-              name: 'cardType',
-              value: 'pitcher'  
-            }
+              name: "cardType",
+              value: "pitcher",
+            },
           })
         } else {
           updateCard({
             target: {
-              name: 'cardType',
-              value: 'batter'  
-            }
+              name: "cardType",
+              value: "batter",
+            },
           })
         }
-        if(value === 'SP') {
+        if (value === "SP") {
           updateCard({
             target: {
-              name: 'position',
-              value: 'Starting Pitcher'  
-            }
+              name: "position",
+              value: "Starting Pitcher",
+            },
           })
         }
-        if(value === 'RP') {
+        if (value === "RP") {
           updateCard({
             target: {
-              name: 'position',
-              value: 'Relief Pitcher'  
-            }
+              name: "position",
+              value: "Relief Pitcher",
+            },
           })
         }
-        if(value === 'CP') {
+        if (value === "CP") {
           updateCard({
             target: {
-              name: 'position',
-              value: 'Closing Pitcher'  
-            }
+              name: "position",
+              value: "Closing Pitcher",
+            },
           })
         }
-        if(value === 'C') {
+        if (value === "C") {
           updateCard({
             target: {
-              name: 'position',
-              value: 'Catcher'  
-            }
+              name: "position",
+              value: "Catcher",
+            },
           })
         }
-        if(value === '1B') {
+        if (value === "1B") {
           updateCard({
             target: {
-              name: 'position',
-              value: 'First Base'  
-            }
+              name: "position",
+              value: "First Base",
+            },
           })
         }
-        if(value === '2B') {
+        if (value === "2B") {
           updateCard({
             target: {
-              name: 'position',
-              value: 'Second Base'  
-            }
+              name: "position",
+              value: "Second Base",
+            },
           })
         }
-        if(value === 'SS') {
+        if (value === "SS") {
           updateCard({
             target: {
-              name: 'position',
-              value: 'Shortstop'  
-            }
+              name: "position",
+              value: "Shortstop",
+            },
           })
         }
-        if(value === '3B') {
+        if (value === "3B") {
           updateCard({
             target: {
-              name: 'position',
-              value: 'Third Base'  
-            }
+              name: "position",
+              value: "Third Base",
+            },
           })
         }
-        if(value === 'LF') {
+        if (value === "LF") {
           updateCard({
             target: {
-              name: 'position',
-              value: 'Left Field'  
-            }
+              name: "position",
+              value: "Left Field",
+            },
           })
         }
-        if(value === 'CF') {
+        if (value === "CF") {
           updateCard({
             target: {
-              name: 'position',
-              value: 'Center Field'  
-            }
+              name: "position",
+              value: "Center Field",
+            },
           })
         }
-        if(value === 'RF') {
+        if (value === "RF") {
           updateCard({
             target: {
-              name: 'position',
-              value: 'Right Field'  
-            }
+              name: "position",
+              value: "Right Field",
+            },
           })
         }
-      }   
+      }
 
-      if(key === 'name') {
-        var first_name = value.split(' ')[0]
-        var last_name = value.split(' ')[1]
+      if (key === "name") {
+        var first_name = value.split(" ")[0]
+        var last_name = value.split(" ")[1]
         updateCard({
           target: {
-            name: 'firstName',
-            value: first_name
-          }
+            name: "firstName",
+            value: first_name,
+          },
         })
 
         updateCard({
           target: {
-            name: 'lastName',
-            value: last_name
-          }
+            name: "lastName",
+            value: last_name,
+          },
         })
       }
-    });
-  },[])
+    })
+  }, [])
 
   const battingStats = [
     "contactR",
@@ -390,29 +397,29 @@ const CardBuilder = () => {
   const updateCard = event => {
     const eventValue = event.target.value
     const eventName = event.target.name
-    
-    if(eventName === 'position') { 
+
+    if (eventName === "position") {
       setPosition(eventValue)
     }
-    if(eventName === 'cardSeries') {
+    if (eventName === "cardSeries") {
       setCardSeries(eventValue)
     }
-    if(eventName === 'pitch1') { 
+    if (eventName === "pitch1") {
       setPitch1(eventValue)
     }
-    if(eventName === 'pitch2') {
+    if (eventName === "pitch2") {
       setPitch2(eventValue)
     }
-    if(eventName === 'pitch3') {
+    if (eventName === "pitch3") {
       setPitch3(eventValue)
     }
-    if(eventName === 'pitch4') {
+    if (eventName === "pitch4") {
       setPitch4(eventValue)
     }
-    if(eventName === 'pitch5') {
+    if (eventName === "pitch5") {
       setPitch5(eventValue)
     }
-    if(eventName === 'team') {
+    if (eventName === "team") {
       setTeam(eventValue)
     }
     if (eventName === "cardType" && eventValue === "pitcher") {
@@ -879,399 +886,323 @@ const CardBuilder = () => {
         </div>
       </div>
       <div className="card-inputs">
-        <Paper elevation={2}>
-          <Box p={5}>
-            <Typography variant="h6" component="h2" gutterBottom>
-              Card Info
-            </Typography>
-            <Grid container spacing={4}>
-              <Grid item alignItems="flex-end">
-                <FormControl>
-                  <Button
-                    variant="contained"
-                    component="label"
-                    className="upload-button"
-                  >
-                    Upload Player Image
-                    <Input
-                      id="cardImage"
-                      name="cardImage"
-                      onChange={updateCardImage}
-                      type="file"
-                      style={{
-                        display: "none",
-                      }}
+        <Typography variant="h2" gutterBottom>
+          Build Your Card
+        </Typography>
+        <TabContext value={tab}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Tabs
+              value={tab}
+              onChange={handleChange}
+              variant="scrollable"
+              scrollButtons
+              allowScrollButtonsMobile
+            >
+              <Tab label="Card Info" value="1" />
+              <Tab label="Player Info" value="2" />
+              {!isPitcher ? <Tab label="Hitting Attributes" value="3" /> : ""}
+              {isPitcher ? <Tab label="Pitching Attributes" value="4" /> : ""}
+              {isPitcher ? <Tab label="Pitches" value="5" /> : ""}
+              <Tab label="Defensive Attributes" value="6" />
+              {!isPitcher ? <Tab label="Baserunning Info" value="7" /> : ""}
+              {!isPitcher ? <Tab label="Shields" value="8" /> : ""}
+              <Tab label="Download" value="9" />
+            </Tabs>
+          </Box>
+
+          <TabPanel value="1" sx={{ padding: 0 }}>
+            <Card sx={{ padding: "1rem" }}>
+              <CardContent>
+                <Grid container spacing={4}>
+                  <Grid item alignItems="flex-end">
+                    <FormControl>
+                      <Button
+                        variant="contained"
+                        component="label"
+                        className="upload-button"
+                        style={{marginRight: "1rem"}}
+                      >
+                        Upload Player Image
+                        <Input
+                          id="cardImage"
+                          name="cardImage"
+                          onChange={updateCardImage}
+                          type="file"
+                          style={{
+                            display: "none",
+                          }}
+                        />
+                      </Button>
+                      <FormHelperText>
+                        Best size: 174px wide by 246px tall
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl style={{ minWidth: 100 }}>
+                      <InputLabel id="card-type-helper-label">
+                        Card Type
+                      </InputLabel>
+                      <Select
+                        labelId="card-type-helper-label"
+                        id="card-type-helper"
+                        onBlur=""
+                        name="cardType"
+                        value={cardType}
+                        defaultValue={cardType}
+                        onChange={updateCard}
+                        style={{ width: "135px" }}
+                      >
+                        <MenuItem value={"batter"}>Batter</MenuItem>
+                        <MenuItem value={"pitcher"}>Pitcher</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl>
+                      <TextField
+                        label="Overall Rating"
+                        id="overall-rating"
+                        name="overallRating"
+                        value={customData.overallRating}
+                        onChange={updateCard}
+                        sx={{ width: "150px" }}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl style={{ minWidth: 120 }}>
+                      <InputLabel id="card-series-helper-label">
+                        Card Series
+                      </InputLabel>
+                      <Select
+                        style={{ width: "140px" }}
+                        labelId="card-series-helper-label"
+                        id="card-series-helper"
+                        onBlur=""
+                        name="cardSeries"
+                        value={cardSeries}
+                        onChange={updateCard}
+                      >
+                        <MenuItem value={"none"}>None</MenuItem>
+                        <MenuItem value={"second-half"}>
+                          2nd Half Heroes
+                        </MenuItem>
+                        <MenuItem value={"all-star"}>All Star</MenuItem>
+                        <MenuItem value={"breakout"}>Breakout</MenuItem>
+                        <MenuItem value={"postseason"}>Postseason</MenuItem>
+                        <MenuItem value={"prime"}>Prime</MenuItem>
+                        <MenuItem value={"rookie"}>Rookie</MenuItem>
+                        <MenuItem value={"veteran"}>Veteran</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl>
+                      <TextField
+                        sx={{ width: "120px" }}
+                        label="Card Year"
+                        id="card-year"
+                        name="cardYear"
+                        onChange={updateCard}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={displayCardRating}
+                          onChange={handleSwitchChange}
+                          name="displayCardRating"
+                        />
+                      }
+                      label="Display Card Rating"
                     />
-                  </Button>
-                  <FormHelperText>
-                    Best size: 174px wide by 246px tall
-                  </FormHelperText>
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl style={{ minWidth: 100 }}>
-                  <InputLabel id="card-type-helper-label">Card Type</InputLabel>
-                  <Select
-                    labelId="card-type-helper-label"
-                    id="card-type-helper"
-                    onBlur=""
-                    name="cardType"
-                    
-                    value={cardType}
-                    defaultValue={cardType}
-                    onChange={updateCard}
-                    style={{ width: "135px" }}
-                  >
-                    <MenuItem value={"batter"}>Batter</MenuItem>
-                    <MenuItem value={"pitcher"}>Pitcher</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    label="Overall Rating"
-                    id="overall-rating"
-                    name="overallRating"
-                    value={customData.overallRating}
-                    onChange={updateCard}
-                    sx={{ width: "150px" }}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl style={{ minWidth: 120 }}>
-                  <InputLabel id="card-series-helper-label">
-                    Card Series
-                  </InputLabel>
-                  <Select
-                    style={{ width: "140px" }}
-                    labelId="card-series-helper-label"
-                    id="card-series-helper"
-                    onBlur=""
-                    name="cardSeries"
-                    value={cardSeries}
-                    onChange={updateCard}
-                  >
-                    <MenuItem value={"none"}>None</MenuItem>
-                    <MenuItem value={"second-half"}>2nd Half Heroes</MenuItem>
-                    <MenuItem value={"all-star"}>All Star</MenuItem>
-                    <MenuItem value={"breakout"}>Breakout</MenuItem>
-                    <MenuItem value={"postseason"}>Postseason</MenuItem>
-                    <MenuItem value={"prime"}>Prime</MenuItem>
-                    <MenuItem value={"rookie"}>Rookie</MenuItem>
-                    <MenuItem value={"veteran"}>Veteran</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    sx={{ width: "120px" }}
-                    label="Card Year"
-                    id="card-year"
-                    name="cardYear"
-                    onChange={updateCard}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={displayCardRating}
-                      onChange={handleSwitchChange}
-                      name="displayCardRating"
-                    />
-                  }
-                  label="Display Card Rating"
-                />
-              </Grid>
-            </Grid>
-
-            <Typography variant="p" component="p" paragraph></Typography>
-            <Divider variant="middle" />
-
-            <Typography variant="h6" component="h2" gutterBottom>
-              Player Info
-            </Typography>
-            <Grid container spacing={4}>
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    label="First Name"
-                    id="first-name"
-                    name="firstName"
-                    value={customData.firstName}
-                    onChange={updateCard}
-                  />
-                </FormControl>
-              </Grid>
-
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    label="Last Name"
-                    id="last-name"
-                    name="lastName"
-                    value={customData.lastName}
-                    onChange={updateCard}
-                  />
-                </FormControl>
-              </Grid>
-
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    sx={{ width: "120px" }}
-                    label="Number"
-                    id="number"
-                    name="number"
-                    variant="outlined"
-                    value={customData.number}
-                    onChange={updateCard}
-                  />
-                </FormControl>
-              </Grid>
-
-              <Grid item>
-                <FormControl style={{ minWidth: 100 }}>
-                  <InputLabel id="team-helper-label">Team</InputLabel>
-                  <Select
-                    style={{ width: "175px" }}
-                    labelId="team-helper-label"
-                    id="team-helper"
-                    onBlur=""
-                    name="team"
-                    
-                    value={team}
-                    onChange={updateCard}
-                  >
-                    <MenuItem value={"Free Agent"}>Free Agent</MenuItem>
-                    <MenuItem value={"Angels"}>Angels</MenuItem>
-                    <MenuItem value={"Astros"}>Astros</MenuItem>
-                    <MenuItem value={"Athletics"}>Atletics</MenuItem>
-                    <MenuItem value={"Blue Jays"}>Blue Jays</MenuItem>
-                    <MenuItem value={"Braves"}>Braves</MenuItem>
-                    <MenuItem value={"Brewers"}>Brewers</MenuItem>
-                    <MenuItem value={"Cardinals"}>Cardinals</MenuItem>
-                    <MenuItem value={"Cubs"}>Cubs</MenuItem>
-                    <MenuItem value={"Diamondbacks"}>Diamondbacks</MenuItem>
-                    <MenuItem value={"Dodgers"}>Dodgers</MenuItem>
-                    <MenuItem value={"Giants"}>Giants</MenuItem>
-                    <MenuItem value={"Guardians"}>Guardians</MenuItem>
-                    <MenuItem value={"Mariners"}>Mariners</MenuItem>
-                    <MenuItem value={"Marlins"}>Marlins</MenuItem>
-                    <MenuItem value={"Mets"}>Mets</MenuItem>
-                    <MenuItem value={"Nationals"}>Nationals</MenuItem>
-                    <MenuItem value={"Orioles"}>Orioles</MenuItem>
-                    <MenuItem value={"Padres"}>Padres</MenuItem>
-                    <MenuItem value={"Pirates"}>Pirates</MenuItem>
-                    <MenuItem value={"Phillies"}>Phillies</MenuItem>
-                    <MenuItem value={"Rangers"}>Rangers</MenuItem>
-                    <MenuItem value={"Rays"}>Rays</MenuItem>
-                    <MenuItem value={"Reds"}>Reds</MenuItem>
-                    <MenuItem value={"Red Sox"}>Red Sox</MenuItem>
-                    <MenuItem value={"Rockies"}>Rockies</MenuItem>
-                    <MenuItem value={"Royals"}>Royals</MenuItem>
-                    <MenuItem value={"Tigers"}>Tigers</MenuItem>
-                    <MenuItem value={"Twins"}>Twins</MenuItem>
-                    <MenuItem value={"White Sox"}>White Sox</MenuItem>
-                    <MenuItem value={"Yankees"}>Yankees</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-
-              <Grid item>
-                <FormControl style={{ minWidth: 100 }}>
-                  <InputLabel id="position-helper-label">Position</InputLabel>
-                  <Select
-                    style={{ width: "175px" }}
-                    labelId="position-helper-label"
-                    id="position-helper"
-                    onBlur=""
-                    name="position"
-                    value={position}
-                    onChange={updateCard}
-                  >
-                    <MenuItem value={"Catcher"}>Catcher</MenuItem>
-                    <MenuItem value={"First Base"}>First Base</MenuItem>
-                    <MenuItem value={"Second Base"}>Second Base</MenuItem>
-                    <MenuItem value={"Third Base"}>Third Base</MenuItem>
-                    <MenuItem value={"Short Stop"}>Short Stop</MenuItem>
-                    <MenuItem value={"Right Field"}>Right Field</MenuItem>
-                    <MenuItem value={"Center Field"}>Center Field</MenuItem>
-                    <MenuItem value={"Left Field"}>Left Field</MenuItem>
-                    <MenuItem value={"Starting Pitcher"}>
-                      Starting Pitcher
-                    </MenuItem>
-                    <MenuItem value={"Relief Pitcher"}>Relief Pitcher</MenuItem>
-                    <MenuItem value={"Closing Pitcher"}>
-                      Closing Pitcher
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    id="secondary-position"
-                    name="secondaryPosition"
-                    value={customData.secondaryPosition}
-                    onChange={updateCard}
-                    label="Secondary Position"
-                  />
-                </FormControl>
-              </Grid>
-
-              <Grid item>
-                <FormControl style={{ minWidth: 60 }}>
-                  <InputLabel id="bats-helper-label">Bats</InputLabel>
-                  <Select
-                    style={{ width: "120px" }}
-                    labelId="bats-helper-label"
-                    id="bats-helper"
-                    onBlur=""
-                    name="bats"
-                    value={bats}
-                    onChange={updateCard}
-                  >
-                    <MenuItem value={"R"}>Right</MenuItem>
-                    <MenuItem value={"L"}>Left</MenuItem>
-                    <MenuItem value={"S"}>Switch</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl style={{ minWidth: 80 }}>
-                  <InputLabel id="throws-helper-label">Throws</InputLabel>
-                  <Select
-                    style={{ width: "120px" }}
-                    labelId="throws-helper-label"
-                    id="throws-helper"
-                    onBlur=""
-                    name="throws"
-                    value={throws}
-                    onChange={updateCard}
-                  >
-                    <MenuItem value={"R"}>Right</MenuItem>
-                    <MenuItem value={"L"}>Left</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    label="Weight"
-                    sx={{ width: "120px" }}
-                    id="weight"
-                    name="weight"
-                    value={customData.weight}
-                    onChange={updateCard}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    label="Height"
-                    sx={{ width: "120px" }}
-                    id="height"
-                    name="height"
-                    value={customData.height}
-                    onChange={updateCard}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    label="Age"
-                    sx={{ width: "120px" }}
-                    id="age"
-                    name="age"
-                    value={customData.age}
-                    onChange={updateCard}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    label="Born"
-                    id="born"
-                    name="born"
-                    value={customData.born}
-                    onChange={updateCard}
-                  />
-                  <FormHelperText>State or Country</FormHelperText>
-                </FormControl>
-              </Grid>
-            </Grid>
-            <Divider variant="middle" />
-            {!isPitcher ? (
-              <div>
-                <Typography variant="h6" component="h2" gutterBottom>
-                  Hitting Attributes
-                </Typography>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+          </TabPanel>
+          <TabPanel value="2" sx={{ padding: 0 }}>
+            <Card sx={{ padding: "1rem" }}>
+              <CardContent>
                 <Grid container spacing={4}>
                   <Grid item>
                     <FormControl>
                       <TextField
-                        label="Contact - R"
-                        sx={{ width: "130px" }}
-                        id="contactR"
-                        name="contactR"
-                        value={customData.contactR}
+                        label="First Name"
+                        id="first-name"
+                        name="firstName"
+                        value={customData.firstName}
                         onChange={updateCard}
                       />
                     </FormControl>
                   </Grid>
+
                   <Grid item>
                     <FormControl>
                       <TextField
-                        label="Contact - L"
-                        sx={{ width: "130px" }}
-                        id="contactL"
-                        name="contactL"
-                        value={customData.contactL}
+                        label="Last Name"
+                        id="last-name"
+                        name="lastName"
+                        value={customData.lastName}
                         onChange={updateCard}
                       />
                     </FormControl>
                   </Grid>
+
                   <Grid item>
                     <FormControl>
                       <TextField
-                        label="Power - R"
-                        sx={{ width: "130px" }}
-                        id="powerR"
-                        name="powerR"
-                        value={customData.powerR}
-                        onChange={updateCard}
-                      />
-                    </FormControl>
-                  </Grid>
-                  <Grid item>
-                    <FormControl>
-                      <TextField
-                        label="Power - L"
-                        sx={{ width: "130px" }}
-                        id="powerL"
-                        name="powerL"
-                        value={customData.powerL}
-                        onChange={updateCard}
-                      />
-                    </FormControl>
-                  </Grid>
-                  <Grid item>
-                    <FormControl>
-                      <TextField
-                        label="Vision"
                         sx={{ width: "120px" }}
-                        id="vision"
-                        name="vision"
-                        value={customData.vision}
+                        label="Number"
+                        id="number"
+                        name="number"
+                        variant="outlined"
+                        value={customData.number}
+                        onChange={updateCard}
+                      />
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item>
+                    <FormControl style={{ minWidth: 100 }}>
+                      <InputLabel id="team-helper-label">Team</InputLabel>
+                      <Select
+                        style={{ width: "175px" }}
+                        labelId="team-helper-label"
+                        id="team-helper"
+                        onBlur=""
+                        name="team"
+                        value={team}
+                        onChange={updateCard}
+                      >
+                        <MenuItem value={"Free Agent"}>Free Agent</MenuItem>
+                        <MenuItem value={"Angels"}>Angels</MenuItem>
+                        <MenuItem value={"Astros"}>Astros</MenuItem>
+                        <MenuItem value={"Athletics"}>Atletics</MenuItem>
+                        <MenuItem value={"Blue Jays"}>Blue Jays</MenuItem>
+                        <MenuItem value={"Braves"}>Braves</MenuItem>
+                        <MenuItem value={"Brewers"}>Brewers</MenuItem>
+                        <MenuItem value={"Cardinals"}>Cardinals</MenuItem>
+                        <MenuItem value={"Cubs"}>Cubs</MenuItem>
+                        <MenuItem value={"Diamondbacks"}>Diamondbacks</MenuItem>
+                        <MenuItem value={"Dodgers"}>Dodgers</MenuItem>
+                        <MenuItem value={"Giants"}>Giants</MenuItem>
+                        <MenuItem value={"Guardians"}>Guardians</MenuItem>
+                        <MenuItem value={"Mariners"}>Mariners</MenuItem>
+                        <MenuItem value={"Marlins"}>Marlins</MenuItem>
+                        <MenuItem value={"Mets"}>Mets</MenuItem>
+                        <MenuItem value={"Nationals"}>Nationals</MenuItem>
+                        <MenuItem value={"Orioles"}>Orioles</MenuItem>
+                        <MenuItem value={"Padres"}>Padres</MenuItem>
+                        <MenuItem value={"Pirates"}>Pirates</MenuItem>
+                        <MenuItem value={"Phillies"}>Phillies</MenuItem>
+                        <MenuItem value={"Rangers"}>Rangers</MenuItem>
+                        <MenuItem value={"Rays"}>Rays</MenuItem>
+                        <MenuItem value={"Reds"}>Reds</MenuItem>
+                        <MenuItem value={"Red Sox"}>Red Sox</MenuItem>
+                        <MenuItem value={"Rockies"}>Rockies</MenuItem>
+                        <MenuItem value={"Royals"}>Royals</MenuItem>
+                        <MenuItem value={"Tigers"}>Tigers</MenuItem>
+                        <MenuItem value={"Twins"}>Twins</MenuItem>
+                        <MenuItem value={"White Sox"}>White Sox</MenuItem>
+                        <MenuItem value={"Yankees"}>Yankees</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item>
+                    <FormControl style={{ minWidth: 100 }}>
+                      <InputLabel id="position-helper-label">
+                        Position
+                      </InputLabel>
+                      <Select
+                        style={{ width: "175px" }}
+                        labelId="position-helper-label"
+                        id="position-helper"
+                        onBlur=""
+                        name="position"
+                        value={position}
+                        onChange={updateCard}
+                      >
+                        <MenuItem value={"Catcher"}>Catcher</MenuItem>
+                        <MenuItem value={"First Base"}>First Base</MenuItem>
+                        <MenuItem value={"Second Base"}>Second Base</MenuItem>
+                        <MenuItem value={"Third Base"}>Third Base</MenuItem>
+                        <MenuItem value={"Short Stop"}>Short Stop</MenuItem>
+                        <MenuItem value={"Right Field"}>Right Field</MenuItem>
+                        <MenuItem value={"Center Field"}>Center Field</MenuItem>
+                        <MenuItem value={"Left Field"}>Left Field</MenuItem>
+                        <MenuItem value={"Starting Pitcher"}>
+                          Starting Pitcher
+                        </MenuItem>
+                        <MenuItem value={"Relief Pitcher"}>
+                          Relief Pitcher
+                        </MenuItem>
+                        <MenuItem value={"Closing Pitcher"}>
+                          Closing Pitcher
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item>
+                    <FormControl>
+                      <TextField
+                        id="secondary-position"
+                        name="secondaryPosition"
+                        value={customData.secondaryPosition}
+                        onChange={updateCard}
+                        label="Secondary Position"
+                      />
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item>
+                    <FormControl style={{ minWidth: 60 }}>
+                      <InputLabel id="bats-helper-label">Bats</InputLabel>
+                      <Select
+                        style={{ width: "120px" }}
+                        labelId="bats-helper-label"
+                        id="bats-helper"
+                        onBlur=""
+                        name="bats"
+                        value={bats}
+                        onChange={updateCard}
+                      >
+                        <MenuItem value={"R"}>Right</MenuItem>
+                        <MenuItem value={"L"}>Left</MenuItem>
+                        <MenuItem value={"S"}>Switch</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl style={{ minWidth: 80 }}>
+                      <InputLabel id="throws-helper-label">Throws</InputLabel>
+                      <Select
+                        style={{ width: "120px" }}
+                        labelId="throws-helper-label"
+                        id="throws-helper"
+                        onBlur=""
+                        name="throws"
+                        value={throws}
+                        onChange={updateCard}
+                      >
+                        <MenuItem value={"R"}>Right</MenuItem>
+                        <MenuItem value={"L"}>Left</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl>
+                      <TextField
+                        label="Weight"
+                        sx={{ width: "120px" }}
+                        id="weight"
+                        name="weight"
+                        value={customData.weight}
                         onChange={updateCard}
                       />
                     </FormControl>
@@ -1279,11 +1210,233 @@ const CardBuilder = () => {
                   <Grid item>
                     <FormControl>
                       <TextField
-                        label="Discipline"
+                        label="Height"
                         sx={{ width: "120px" }}
-                        id="discipline"
-                        name="discipline"
-                        value={customData.discipline}
+                        id="height"
+                        name="height"
+                        value={customData.height}
+                        onChange={updateCard}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl>
+                      <TextField
+                        label="Age"
+                        sx={{ width: "120px" }}
+                        id="age"
+                        name="age"
+                        value={customData.age}
+                        onChange={updateCard}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl>
+                      <TextField
+                        label="Born"
+                        id="born"
+                        name="born"
+                        value={customData.born}
+                        onChange={updateCard}
+                      />
+                      <FormHelperText>State or Country</FormHelperText>
+                    </FormControl>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+          </TabPanel>
+          <TabPanel value="3" sx={{ padding: 0 }}>
+            <Card sx={{ padding: "1rem" }}>
+              <CardContent>
+                <div>
+                  <Grid container spacing={4}>
+                    <Grid item>
+                      <FormControl>
+                        <TextField
+                          label="Contact - R"
+                          sx={{ width: "130px" }}
+                          id="contactR"
+                          name="contactR"
+                          value={customData.contactR}
+                          onChange={updateCard}
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item>
+                      <FormControl>
+                        <TextField
+                          label="Contact - L"
+                          sx={{ width: "130px" }}
+                          id="contactL"
+                          name="contactL"
+                          value={customData.contactL}
+                          onChange={updateCard}
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item>
+                      <FormControl>
+                        <TextField
+                          label="Power - R"
+                          sx={{ width: "130px" }}
+                          id="powerR"
+                          name="powerR"
+                          value={customData.powerR}
+                          onChange={updateCard}
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item>
+                      <FormControl>
+                        <TextField
+                          label="Power - L"
+                          sx={{ width: "130px" }}
+                          id="powerL"
+                          name="powerL"
+                          value={customData.powerL}
+                          onChange={updateCard}
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item>
+                      <FormControl>
+                        <TextField
+                          label="Vision"
+                          sx={{ width: "120px" }}
+                          id="vision"
+                          name="vision"
+                          value={customData.vision}
+                          onChange={updateCard}
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item>
+                      <FormControl>
+                        <TextField
+                          label="Discipline"
+                          sx={{ width: "120px" }}
+                          id="discipline"
+                          name="discipline"
+                          value={customData.discipline}
+                          onChange={updateCard}
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item>
+                      <FormControl>
+                        <TextField
+                          label="Clutch"
+                          sx={{ width: "120px" }}
+                          id="clutch"
+                          name="clutch"
+                          value={customData.clutch}
+                          onChange={updateCard}
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item>
+                      <FormControl>
+                        <TextField
+                          label="Bunt"
+                          sx={{ width: "120px" }}
+                          id="bunt"
+                          name="bunt"
+                          value={customData.bunt}
+                          onChange={updateCard}
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item>
+                      <FormControl>
+                        <TextField
+                          label="Drag Bunt"
+                          sx={{ width: "120px" }}
+                          id="drag-bunt"
+                          name="dragBunt"
+                          value={customData.dragBunt}
+                          onChange={updateCard}
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item>
+                      <FormControl>
+                        <TextField
+                          label="Durability"
+                          sx={{ width: "120px" }}
+                          id="durability"
+                          name="durability"
+                          value={customData.durability}
+                          onChange={updateCard}
+                        />
+                      </FormControl>
+                    </Grid>
+                  </Grid>
+                </div>
+              </CardContent>
+            </Card>
+          </TabPanel>
+          <TabPanel value="4" sx={{ padding: 0 }}>
+            <Card sx={{ padding: "1rem" }}>
+              <CardContent>
+                <Grid container spacing={4}>
+                  <Grid item>
+                    <FormControl>
+                      <TextField
+                        id="stamina"
+                        name="stamina"
+                        onChange={updateCard}
+                        label="Stamina"
+                        value={customData.stamina}
+                        sx={{ width: "120px" }}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl>
+                      <TextField
+                        label="H/9"
+                        sx={{ width: "120px" }}
+                        id="h9"
+                        name="h9"
+                        value={customData.h9}
+                        onChange={updateCard}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl>
+                      <TextField
+                        label="K/9"
+                        sx={{ width: "120px" }}
+                        id="k9"
+                        name="k9"
+                        value={customData.k9}
+                        onChange={updateCard}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl>
+                      <TextField
+                        label="BB/9"
+                        sx={{ width: "120px" }}
+                        id="bb9"
+                        name="bb9"
+                        value={customData.bb9}
+                        onChange={updateCard}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <FormControl>
+                      <TextField
+                        label="HR/9"
+                        sx={{ width: "120px" }}
+                        id="hr9"
+                        name="hr9"
+                        value={customData.hr9}
                         onChange={updateCard}
                       />
                     </FormControl>
@@ -1293,9 +1446,9 @@ const CardBuilder = () => {
                       <TextField
                         label="Clutch"
                         sx={{ width: "120px" }}
-                        id="clutch"
-                        name="clutch"
-                        value={customData.clutch}
+                        id="pclt"
+                        name="pclt"
+                        value={customData.pclt}
                         onChange={updateCard}
                       />
                     </FormControl>
@@ -1303,11 +1456,11 @@ const CardBuilder = () => {
                   <Grid item>
                     <FormControl>
                       <TextField
-                        label="Bunt"
+                        label="Control"
                         sx={{ width: "120px" }}
-                        id="bunt"
-                        name="bunt"
-                        value={customData.bunt}
+                        id="control"
+                        name="control"
+                        value={customData.control}
                         onChange={updateCard}
                       />
                     </FormControl>
@@ -1315,11 +1468,11 @@ const CardBuilder = () => {
                   <Grid item>
                     <FormControl>
                       <TextField
-                        label="Drag Bunt"
+                        label="Velocity"
                         sx={{ width: "120px" }}
-                        id="drag-bunt"
-                        name="dragBunt"
-                        value={customData.dragBunt}
+                        id="velocity"
+                        name="velocity"
+                        value={customData.velocity}
                         onChange={updateCard}
                       />
                     </FormControl>
@@ -1327,26 +1480,22 @@ const CardBuilder = () => {
                   <Grid item>
                     <FormControl>
                       <TextField
-                        label="Durability"
+                        label="Break"
                         sx={{ width: "120px" }}
-                        id="durability"
-                        name="durability"
-                        value={customData.durability}
+                        id="break"
+                        name="break"
+                        value={customData.break}
                         onChange={updateCard}
                       />
                     </FormControl>
                   </Grid>
                 </Grid>
-              </div>
-            ) : (
-              ""
-            )}
-
-            {isPitcher ? (
-              <div>
-                <Typography variant="h6" component="h2" gutterBottom>
-                  Pitches
-                </Typography>
+              </CardContent>
+            </Card>
+          </TabPanel>
+          <TabPanel value="5" sx={{ padding: 0 }}>
+            <Card sx={{ padding: "1rem" }}>
+              <CardContent>
                 <Grid container spacing={4}>
                   <Grid item>
                     <FormControl
@@ -1629,31 +1778,21 @@ const CardBuilder = () => {
                     </FormControl>
                   </Grid>
                 </Grid>
-                <Divider variant="middle" />
-                <Typography variant="h6" component="h2" gutterBottom>
-                  Pitching Attributes
-                </Typography>
+              </CardContent>
+            </Card>
+          </TabPanel>
+          <TabPanel value="6" sx={{ padding: 0 }}>
+            <Card sx={{ padding: "1rem" }}>
+              <CardContent>
                 <Grid container spacing={4}>
                   <Grid item>
                     <FormControl>
                       <TextField
-                        id="stamina"
-                        name="stamina"
-                        onChange={updateCard}
-                        label="Stamina"
-                        value={customData.stamina}
+                        label="Fielding"
                         sx={{ width: "120px" }}
-                      />
-                    </FormControl>
-                  </Grid>
-                  <Grid item>
-                    <FormControl>
-                      <TextField
-                        label="H/9"
-                        sx={{ width: "120px" }}
-                        id="h9"
-                        name="h9"
-                        value={customData.h9}
+                        id="fielding"
+                        name="fielding"
+                        value={customData.fielding}
                         onChange={updateCard}
                       />
                     </FormControl>
@@ -1661,11 +1800,11 @@ const CardBuilder = () => {
                   <Grid item>
                     <FormControl>
                       <TextField
-                        label="K/9"
+                        label="Arm"
                         sx={{ width: "120px" }}
-                        id="k9"
-                        name="k9"
-                        value={customData.k9}
+                        id="arm"
+                        name="arm"
+                        value={customData.arm}
                         onChange={updateCard}
                       />
                     </FormControl>
@@ -1673,11 +1812,11 @@ const CardBuilder = () => {
                   <Grid item>
                     <FormControl>
                       <TextField
-                        label="BB/9"
+                        label="Accuracy"
                         sx={{ width: "120px" }}
-                        id="bb9"
-                        name="bb9"
-                        value={customData.bb9}
+                        id="accuracy"
+                        name="accuracy"
+                        value={customData.accuracy}
                         onChange={updateCard}
                       />
                     </FormControl>
@@ -1685,130 +1824,23 @@ const CardBuilder = () => {
                   <Grid item>
                     <FormControl>
                       <TextField
-                        label="HR/9"
+                        label="Reaction"
                         sx={{ width: "120px" }}
-                        id="hr9"
-                        name="hr9"
-                        value={customData.hr9}
-                        onChange={updateCard}
-                      />
-                    </FormControl>
-                  </Grid>
-                  <Grid item>
-                    <FormControl>
-                      <TextField
-                        label="Clutch"
-                        sx={{ width: "120px" }}
-                        id="pclt"
-                        name="pclt"
-                        value={customData.pclt}
-                        onChange={updateCard}
-                      />
-                    </FormControl>
-                  </Grid>
-                  <Grid item>
-                    <FormControl>
-                      <TextField
-                        label="Control"
-                        sx={{ width: "120px" }}
-                        id="control"
-                        name="control"
-                        value={customData.control}
-                        onChange={updateCard}
-                      />
-                    </FormControl>
-                  </Grid>
-                  <Grid item>
-                    <FormControl>
-                      <TextField
-                        label="Velocity"
-                        sx={{ width: "120px" }}
-                        id="velocity"
-                        name="velocity"
-                        value={customData.velocity}
-                        onChange={updateCard}
-                      />
-                    </FormControl>
-                  </Grid>
-                  <Grid item>
-                    <FormControl>
-                      <TextField
-                        label="Break"
-                        sx={{ width: "120px" }}
-                        id="break"
-                        name="break"
-                        value={customData.break}
+                        id="reaction"
+                        name="reaction"
+                        value={customData.reaction}
                         onChange={updateCard}
                       />
                     </FormControl>
                   </Grid>
                 </Grid>
-              </div>
-            ) : (
-              ""
-            )}
-
-            <Divider variant="middle" />
-
-            <Typography variant="h6" component="h2" gutterBottom>
-              Defensive Attributes
-            </Typography>
-            <Grid container spacing={4}>
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    label="Fielding"
-                    sx={{ width: "120px" }}
-                    id="fielding"
-                    name="fielding"
-                    value={customData.fielding}
-                    onChange={updateCard}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    label="Arm"
-                    sx={{ width: "120px" }}
-                    id="arm"
-                    name="arm"
-                    value={customData.arm}
-                    onChange={updateCard}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    label="Accuracy"
-                    sx={{ width: "120px" }}
-                    id="accuracy"
-                    name="accuracy"
-                    value={customData.accuracy}
-                    onChange={updateCard}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl>
-                  <TextField
-                    label="Reaction"
-                    sx={{ width: "120px" }}
-                    id="reaction"
-                    name="reaction"
-                    value={customData.reaction}
-                    onChange={updateCard}
-                  />
-                </FormControl>
-              </Grid>
-            </Grid>
-            <Divider variant="middle" />
-            {!customData.isPitcher ? (
-              <div>
-                <Typography variant="h6" component="h2" gutterBottom>
-                  Baserunning Attributes
-                </Typography>
+              </CardContent>
+            </Card>
+          </TabPanel>
+          <TabPanel value="7" sx={{ padding: 0 }}>
+            <Card sx={{ padding: "1rem" }}>
+              <CardContent>
+                {" "}
                 <Grid container spacing={4}>
                   <Grid item>
                     <FormControl>
@@ -1847,12 +1879,12 @@ const CardBuilder = () => {
                     </FormControl>
                   </Grid>
                 </Grid>
-
-                <Divider variant="middle" />
-
-                <Typography variant="h6" component="h2" gutterBottom>
-                  Shields
-                </Typography>
+              </CardContent>
+            </Card>
+          </TabPanel>
+          <TabPanel value="8" sx={{ padding: 0 }}>
+            <Card sx={{ padding: "1rem" }}>
+              <CardContent>
                 <Grid container spacing={4}>
                   <Grid item>
                     <FormControl
@@ -1905,18 +1937,19 @@ const CardBuilder = () => {
                     </FormControl>
                   </Grid>
                 </Grid>
-              </div>
-            ) : (
-              ""
-            )}
-            <Divider variant="middle" />
-
-            <Button onClick={downloadCard} variant="filled" color="primary">
-              Download Card
-            </Button>
-            <p>Downloading will not work on iOS. Thanks Apple.</p>
-          </Box>
-        </Paper>
+              </CardContent>
+            </Card>
+          </TabPanel>
+          <TabPanel value="9" sx={{ padding: 0 }}>
+            <Card sx={{ padding: "1rem" }}>
+              <CardContent>
+                <Button onClick={downloadCard} variant="filled" color="primary">
+                  Download Card
+                </Button>
+              </CardContent>
+            </Card>
+          </TabPanel>
+        </TabContext>
       </div>
     </>
   )

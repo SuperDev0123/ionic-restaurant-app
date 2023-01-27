@@ -1,12 +1,10 @@
 import { spacing, styled } from "@mui/system"
-import { Chart as ChartJS } from 'chart.js/auto'
-import { Line } from "react-chartjs-2"
+import Line from "@components/Charts/Line"
 import {
   Card as MuiCard,
   CardContent,
   Typography as MuiTypography,
 } from "@mui/material"
- 
 const Card = styled(MuiCard)(spacing)
 const Spacer = styled("div")(spacing)
 const Typography = styled(MuiTypography)(spacing)
@@ -41,27 +39,16 @@ const MarketData = props => {
       return e.best_sell_price
     }
   )
-  const data = {
-    labels: labels.reverse(),
-    datasets: [
-      {
-        label: "Best Buy Price",
-        data: best_buy_price.reverse(),
-        backgroundColor: "#ed2024",
-        borderColor: "#ed2024",
-        barPercentage: 1,
-        categoryPercentage: 1,
-      },
-      {
-        label: "Best Sell Price",
-        data: best_sell_price.reverse(),
-        backgroundColor: "#fff",
-        borderColor: "#fff",
-        barPercentage: 1,
-        categoryPercentage: 1,
-      },
-    ],
-  }
+  const series = [
+    {
+      name: "Best Buy Price",
+      data: best_buy_price.reverse(),
+    },
+    {
+      name: "Best Sell Price",
+      data: best_sell_price.reverse(),
+    },
+  ]
 
   return (
     <Card mb={6}>
@@ -76,7 +63,8 @@ const MarketData = props => {
               BEST BUY
             </Typography>
             <Typography variant="h6" component="p">
-              {props.player?.marketlisting?.best_buy_price.toLocaleString() ?? ""}
+              {props.player?.marketlisting?.best_buy_price.toLocaleString() ??
+                ""}
             </Typography>
           </StatBox>
           <StatBox>
@@ -84,7 +72,8 @@ const MarketData = props => {
               BEST SELL
             </Typography>
             <Typography variant="h6" component="p">
-              {props.player?.marketlisting?.best_sell_price.toLocaleString() ?? ""}
+              {props.player?.marketlisting?.best_sell_price.toLocaleString() ??
+                ""}
             </Typography>
           </StatBox>
           <StatBox>
@@ -100,38 +89,12 @@ const MarketData = props => {
               PROFIT/MIN
             </Typography>
             <Typography variant="h6" component="p">
-              {props.player?.marketlisting?.profit_minute.toLocaleString() ?? ""}
+              {props.player?.marketlisting?.profit_minute.toLocaleString() ??
+                ""}
             </Typography>
           </StatBox>
         </StatRow>
-        <Line
-          data={data}
-          width={400}
-          height={200}
-          style={{maxWidth: "100%"}}
-          options={{
-            maintainAspectRatio: true,
-            plugins: {
-                legend: {
-                  labels: {
-                    color: "#D3D3D3",
-                  },
-                },
-              },
-              scales: {
-                y: {
-                  ticks: {
-                    color: "#D3D3D3",
-                  },
-                },
-                x: {
-                  ticks: {
-                    color: "#D3D3D3",
-                  },
-                },
-              },
-          }}
-        />
+        <Line series={series} labels={labels} />
       </CardContent>
     </Card>
   )

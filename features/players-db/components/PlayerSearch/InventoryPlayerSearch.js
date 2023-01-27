@@ -2,9 +2,9 @@ import Grid from "@mui/material/Grid"
 
 import TableCompare from "@components/Table/TableCompare"
 import useTableDefinition from "@features/tables/hooks/use-table-definition"
-import PlayerSearchFilterModal from "./PlayerSearchFilterModal"
 import { useState } from "react"
 import useTableData from "@features/tables/hooks/use-table-data"
+import FiltersModal from "@components/FiltersModal"
 
 const InventoryPlayerSearch = (props) => {
   const [inventoryType, setInventoryType] = useState("owned");
@@ -50,7 +50,7 @@ const InventoryPlayerSearch = (props) => {
           />
         </Grid>
       </Grid>
-      <PlayerSearchFilterModal
+      <FiltersModal
         isOpen={openFilters}
         onClose={handleFilterClose}
         columnsData={columnsData}

@@ -3,8 +3,8 @@ import Grid from "@mui/material/Grid"
 
 import TableCompare from "@components/Table/TableCompare"
 import useTableDefinition from "../../../tables/hooks/use-table-definition"
-import PlayerSearchFilterModal from "./PlayerSearchFilterModal"
 import useTableData from "@features/tables/hooks/use-table-data"
+import FiltersModal from "@components/FiltersModal"
 
 const UserProfilePlayerSearch = (props) => {
   const TABLE_DATA_SOURCE_URI =
@@ -43,7 +43,7 @@ const UserProfilePlayerSearch = (props) => {
           />
         </Grid>
       </Grid>
-      <PlayerSearchFilterModal
+      <FiltersModal
         isOpen={openFilters}
         onClose={handleFilterClose}
         columnsData={columnsData}

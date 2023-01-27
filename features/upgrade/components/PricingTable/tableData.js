@@ -45,9 +45,9 @@ const tableData = {
       title: "Silver",
       captionBeforePrice: "Best if you just want access to the Discord server.",
       captionAfterPrice: "And never see ads again!",
-      priceMonthly: "$2/month",
-      priceAnnual: "$10/year",
-      priceAnnualPerMonth: "$0.83/month",
+      priceMonthly: "$3/month",
+      priceAnnual: "$30/year",
+      priceAnnualPerMonth: "$2.50/month",
       mobileOrder: 3,
       priceIdMonthly: "price_1L7BljJ9DqRcRXvvEHeU02Y9",
       priceIdAnnual: "price_1JKtFWJ9DqRcRXvvcWnSlH2p",
@@ -69,24 +69,14 @@ const tableData = {
       captionBeforePrice: "Best for streamers and content creators.",
       captionAfterPrice: "Annual plans include a free shirt.",
       priceMonthly: "$10/month",
-      priceAnnual: "$60/year",
-      priceAnnualPerMonth: "$5/month",
+      priceAnnual: "$75/year",
+      priceAnnualPerMonth: "$6.25/month",
       mobileOrder: 1,
       priceIdMonthly: "price_1JKtJlJ9DqRcRXvvhbuo1d7q",
       priceIdAnnual: "price_1JjbdgJ9DqRcRXvvDFUJaNkq",
     },
   ],
   features: [
-    {
-      title: "Review Player Cards",
-      caption: "Let the world know how you really feel about specific cards.",
-      states: [
-        <IncludedIcon />,
-        <IncludedIcon />,
-        <IncludedIcon />,
-        <IncludedIcon />,
-      ],
-    },
     {
       title: "Favorite Player Cards",
       caption:
@@ -109,19 +99,8 @@ const tableData = {
       ],
     },
     {
-      title: "Save Team Builder Rosters",
-      caption:
-        "Build your dream team using our Team Builder tool, then save and share your favorite rosters.",
-      states: [
-        "Coming Soon",
-        "Coming Soon",
-        "Coming Soon",
-        "Coming Soon",
-      ],
-    },
-    {
-      title: "Discord Access",
-      caption: "Full access to the exclusive ShowZone Pro Discord server.",
+      title: "Pro Discord Access",
+      caption: "Full access to the exclusive ShowZone Pro Discord channels.",
       states: [
         <NotIncludedIcon />,
         <IncludedIcon />,
@@ -140,16 +119,47 @@ const tableData = {
       ],
     },
     {
-        title: "Collection Progress Tracker",
-        caption:
-          "Find out exactly how many cards and stubs you need to finish the Live Series and Legend Collections.",
-        states: [
-          "Included For Limited Time",
-          "Included For Limited Time",
-          <IncludedIcon />,
-          <IncludedIcon />,
-        ],
-      },
+      title: "Collection Progress Tracker",
+      caption:
+        "Find out exactly how many cards and stubs you need to finish the Live Series and Legend Collections.",
+      states: [
+        "Live Series Only",
+        "Live Series Only",
+        "All Collections",
+        "All Collections",
+      ],
+    },
+    {
+      title: "Save Team Builder Rosters",
+      caption:
+        "Build your dream team using our Team Builder tool, then save and share your favorite rosters.",
+      states: [
+        "3 Saved Rosters",
+        "5 Saved Rosters",
+        "Unlimited Saved Rosters",
+        "Unlimited Saved Rosters",
+      ],
+    },
+    {
+      title: "Save Tier Builder Lists",
+      caption: "Let the world know how you really feel.",
+      states: [
+        "3 Saved Lists",
+        "5 Saved Lists",
+        "Unlimited Saved Lists",
+        "Unlimited Saved Lists",
+      ],
+    },
+    {
+      title: "Investment Opportunities",
+      caption: "Let the world know how you really feel.",
+      states: [
+        "Common & Bronze Cards",
+        "Common & Bronze Cards",
+        "All Cards",
+        "All Cards",
+      ],
+    },
     {
       title: "Team Builder Roster Generator",
       caption:
@@ -188,8 +198,26 @@ const tableData = {
       states: [
         <NotIncludedIcon />,
         <NotIncludedIcon />,
+        <NotIncludedIcon />,
         <IncludedIcon />,
+      ],
+    },
+    {
+      title: "Premium User Profile",
+      states: [
+        <NotIncludedIcon />,
+        <NotIncludedIcon />,
+        <NotIncludedIcon />,
         <IncludedIcon />,
+      ],
+    },
+    {
+      title: "Push Notication Updates",
+      states: [
+        <NotIncludedIcon />,
+        <NotIncludedIcon />,
+        <NotIncludedIcon />,
+        "Coming Soon",
       ],
     },
     {
@@ -203,7 +231,8 @@ const tableData = {
     },
     {
       title: "White Label Card Builder",
-      caption: "Download your Card Builder creations without the ShowZone logo.",
+      caption:
+        "Download your Card Builder creations without the ShowZone logo.",
       states: [
         <NotIncludedIcon />,
         <NotIncludedIcon />,
@@ -212,22 +241,13 @@ const tableData = {
       ],
     },
     {
-        title: "ShowZone Merch Discount",
-        caption: "Save 10% on ShowZone Merch.",
-        states: [
-          <NotIncludedIcon />,
-          <NotIncludedIcon />,
-          <NotIncludedIcon />,
-          <IncludedIcon />,
-        ],
-      },
-    {
-      title: "Free ShowZone Merch Shirt",
+      title: "ShowZone Merch Discount",
+      caption: "Save 10% on ShowZone Merch.",
       states: [
         <NotIncludedIcon />,
         <NotIncludedIcon />,
         <NotIncludedIcon />,
-        "Annual Plans Only",
+        <IncludedIcon />,
       ],
     },
   ],

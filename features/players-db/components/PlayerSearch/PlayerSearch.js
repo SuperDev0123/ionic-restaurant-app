@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid"
 
 import TableCompare from "@components/Table/TableCompare"
 import useTableDefinition from "@features/tables/hooks/use-table-definition"
-import PlayerSearchFilterModal from "./PlayerSearchFilterModal"
+import FiltersModal from "@components/FiltersModal"
 import useTableData from "@features/tables/hooks/use-table-data"
 
 const TABLE_DATA_SOURCE_URI = "https://api.showzone.io/api/player-profiles/"
@@ -42,7 +42,7 @@ const PlayerSearch = () => {
           />
         </Grid>
       </Grid>
-      <PlayerSearchFilterModal
+      <FiltersModal
         isOpen={openFilters}
         onClose={handleFilterClose}
         columnsData={columnsData}

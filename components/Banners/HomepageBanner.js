@@ -25,8 +25,11 @@ function HomepageBanner(props) {
         font-size: 2.5rem;
       }
       span {
-        font-size: 3rem;
+        font-size: 2.5rem;
         color: #ed2024;
+        ${props => props.theme.breakpoints.up("sm")} {
+          font-size: 3rem;
+        }
         ${props => props.theme.breakpoints.up("md")} {
           font-size: 5rem;
         }
@@ -44,7 +47,7 @@ function HomepageBanner(props) {
 
   return (
     <Styles>
-      <Grid container spacing={12} justifyContent="space-between">
+      <Grid container spacing={20} sx={{padding:".5rem"}}>
         <Grid item xs={12}>
           <h1>
             MLB The Show{" "}
@@ -67,9 +70,9 @@ function HomepageBanner(props) {
             />
           </h1>
           <h2>Tools and Resources for MLB The Show Gamers</h2>
-          <Button color="white" size="xl">Login Now</Button>       
-          <Button color="gold" size="xl">Register a Free Account</Button>
-          <Button size="xl">Get ShowZone Pro</Button>
+          <Button color="white" size="xl" style={{margin: ".25rem"}}>Login <span>&nbsp;Now</span></Button>       
+          <Button color="gold" size="xl" style={{margin: ".25rem"}}>Register<span>&nbsp;a Free Account</span></Button>
+          <Button size="xl" style={{margin: ".25rem"}}>Get <span>&nbsp;ShowZone&nbsp;</span> Pro</Button>
         </Grid>
       </Grid>
     </Styles>

@@ -150,17 +150,19 @@ export const findColumns = ({
       accessor: "player_profile.card_id",
       disableSortBy: true,
       Cell: ({ value }) => {
-        return (
-          <>
-            <NavLink href={"/players/" + String(value)}>
-              <Button size="xs" variant="filled">
-                View Card
-              </Button>
-            </NavLink>
-            &nbsp;&nbsp;
-            <FollowButton player={{ card_id: value }} large={false} />
-          </>
-        )
+        if (value) {
+          return (
+            <>
+              <NavLink href={"/players/" + String(value)}>
+                <Button size="xs" variant="filled">
+                  View Card
+                </Button>
+              </NavLink>
+              &nbsp;&nbsp;
+              <FollowButton player={{ card_id: value }} large={false} />
+            </>
+          )
+        }
       },
     },
     {

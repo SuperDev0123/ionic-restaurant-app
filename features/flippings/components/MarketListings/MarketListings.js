@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import MarketListingsFilterModal from "./MarketListingsFilterModal"
 import FlippingTable from "@components/Table/FlippingTable"
 import useTableDefinition from "@features/tables/hooks/use-table-definition"
 import useTableData from "@features/tables/hooks/use-table-data"
+import FiltersModal, { FiltersSubsetUtil } from "@components/FiltersModal"
 
 const TABLE_DATA_SOURCE_URI = "https://api.showzone.io/api/market-listings/"
 
@@ -61,7 +61,8 @@ const PlayerListings = () => {
 
   return (
     <>
-      <MarketListingsFilterModal
+      <FiltersModal
+        subset={FiltersSubsetUtil.MARKET}
         isOpen={openFilters}
         onClose={handleFilterClose}
         columnsData={columnsData}

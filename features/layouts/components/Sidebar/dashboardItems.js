@@ -86,22 +86,6 @@ const pagesSection = [
         href: "/collections/live-series",
         title: "Live Series Collection",
       },
-      {
-        href: "/collections/brett",
-        title: "Brett Collection",
-      },
-      {
-        href: "/collections/mccutchen",
-        title: "McCutchen Collection",
-      },
-      {
-        href: "/collections/rollins",
-        title: "Rollins Collection",
-      },
-      {
-        href: "/collections/mantle",
-        title: "Mantle Collection",
-      },
     ],
   },
   {

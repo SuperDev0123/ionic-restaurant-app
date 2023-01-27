@@ -38,8 +38,14 @@ function Button({ children, size, color, href, onClick, disabled, variant, style
       transform: skewX(20deg);
       display: flex;
       align-items: center;
+      span {
+        display: none;
+        transform: skewX(0deg);
+        ${props => props.theme.breakpoints.up("sm")} { 
+            display: inline-block;
+        }
+      }
       svg {
-        margin-right: 5px;
         width: 20px;
       }
     }
@@ -57,6 +63,18 @@ function Button({ children, size, color, href, onClick, disabled, variant, style
         ? props => "rgba(186, 16, 12, 1)"
         : props => "rgba(237, 32, 36, 1)"};
       }
+    }
+    &.round {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transform: skewX(0deg);
+        height: 40px;
+        width: 40px;
+        & span {
+            transform: skewX(0deg);
+        }
     }
     &.disabled {
       opacity: 0.35;

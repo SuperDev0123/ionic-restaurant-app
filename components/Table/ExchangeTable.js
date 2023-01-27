@@ -29,12 +29,13 @@ import LoaderBaseball from "../LoaderBaseball"
 import Image from "next/image"
 import { getSortFilterValue } from "@features/tables/utils/table-data-utils"
 import FullscreenIcon from "@mui/icons-material/Fullscreen"
+import FullscreenExitIcon from "@mui/icons-material/FullscreenExit"
 
 const Paper = styled(MuiPaper)(spacing)
 const Toolbar = styled(MuiToolbar)`
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 0;
+  padding: 1rem;
   ${props => props.theme.breakpoints.up("md")} {
     justify-content: space-between;
     align-items: center;
@@ -271,178 +272,189 @@ const ExchangeTable = ({
   if (loading) return <LoaderBaseball />
 
   return (
-    <Paper
-      style={
-        fullscreen
-          ? {
-              position: "absolute",
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0,
-              zIndex: 9998,
-              height: "100%",
-            }
-          : {}
-      }
-    >
-      <Toolbar>
-        <TextField
-          label="Exchange Cost"
-          value={exchangeValue}
-          onChange={changeTargetValue}
-          style={{ width: "100%" }}
-        />
-        <div>
-          <Button
-            variant="filled"
-            size="sm"
-            onClick={handleColumnOpen}
-            style={{ marginRight: "1rem" }}
-          >
-            <ViewWeekIcon style={{ marginRight: ".5rem" }} />
-            Columns
-          </Button>
-          <Button
-            variant="filled"
-            size="sm"
-            onClick={handleFilterOpen}
-            style={{ marginRight: "1rem" }}
-          >
-            <FilterListIcon style={{ marginRight: ".5rem" }} /> Filters
-          </Button>
-          <Button
-            style={{ marginRight: "1rem", marginTop: ".5rem" }}
-            variant="filled"
-            size="sm"
-            onClick={refreshData}
-          >
-            <RefreshIcon style={{ marginRight: ".5rem" }} /> Refresh
-          </Button>
-          {currentUserIsSilverPlus ? (
+    <>
+      <TextField
+        label="Exchange Cost"
+        value={exchangeValue}
+        onChange={changeTargetValue}
+        style={{ width: "100%" }}
+      />
+      <Paper
+        style={
+          fullscreen
+            ? {
+                position: "absolute",
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+                zIndex: 9998,
+                height: "100%",
+              }
+            : {}
+        }
+      >
+        <Toolbar>
+          <div></div>
+          <div>
+            <Button
+              variant="filled"
+              size="sm"
+              onClick={handleColumnOpen}
+              style={{ marginRight: "1rem" }}
+            >
+              <ViewWeekIcon />
+            </Button>
+            <Button
+              variant="filled"
+              size="sm"
+              onClick={handleFilterOpen}
+              style={{ marginRight: "1rem" }}
+            >
+              <FilterListIcon />
+            </Button>
             <Button
               style={{ marginRight: "1rem", marginTop: ".5rem" }}
               variant="filled"
               size="sm"
-              onClick={goFullscreen}
+              onClick={refreshData}
             >
-              <FullscreenIcon style={{ marginRight: ".5rem" }} /> Fullscreen
+              <RefreshIcon />
             </Button>
-          ) : (
-            ""
-          )}
-        </div>
-      </Toolbar>
-      <TableContainer>
-        <Modal
-          open={openColumns}
-          onClose={handleColumnClose}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <ModalPaper>
-            <Typography component="h2" variant="h6">
-              Show Columns
-            </Typography>
-            <IconButton
-              aria-label="close"
-              className="closeModalIcon"
-              onClick={handleColumnClose}
-            >
-              <CloseIcon />
-            </IconButton>
-            {allColumns.map(column => (
-              <div key={column.id}>
-                <FormControlLabel
-                  control={<Checkbox {...column.getToggleHiddenProps()} />}
-                  label={column.Header}
-                />
-              </div>
-            ))}
-          </ModalPaper>
-        </Modal>
-        <StickyStyles>
-          <MuiTable component={Paper} {...getTableProps()}>
-            <TableHead>
-              {headerGroups.map(headerGroup => {
-                const { key: headerGroupKey, ...headerGroupProps } =
-                  headerGroup.getHeaderGroupProps()
-                return (
-                  <TableRow key={headerGroupKey} {...headerGroupProps}>
-                    {headerGroup.headers.map(column => (
-                      <TableCell
-                        className={column.Header}
-                        key={column.id}
-                        {...(column.id === "selection"
-                          ? column.getHeaderProps()
-                          : column.getHeaderProps(
-                              column.getSortByToggleProps()
-                            ))}
-                      >
-                        {column.render("Header")}
-                        {column.id !== "selection" ? (
-                          <TableSortLabel
-                            active={column.isSorted}
-                            // react-table has a unsorted state which is not treated here
-                            direction={column.isSortedDesc ? "desc" : "asc"}
-                          />
-                        ) : null}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                )
-              })}
-            </TableHead>
-            <TableBody className="body">
-              {rows.map((row, i) => {
-                prepareRow(row)
-                return (
-                  <TableRow key={row.id} {...row.getRowProps()}>
-                    {row.cells.map(cell => {
-                      const { key: cellKey, ...cellProps } = cell.getCellProps()
-                      return (
+            {currentUserIsSilverPlus ? (
+              <Button
+                style={{ marginRight: "1rem", marginTop: ".5rem" }}
+                variant="filled"
+                size="sm"
+                onClick={goFullscreen}
+              >
+                {fullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
+              </Button>
+            ) : (
+              ""
+            )}
+          </div>
+        </Toolbar>
+        <TablePagination
+          rowsPerPageOptions={[25]}
+          component="div"
+          count={count}
+          rowsPerPage={25}
+          page={page - 1}
+          onPageChange={handlePageChange}
+        />
+        <TableContainer>
+          <Modal
+            open={openColumns}
+            onClose={handleColumnClose}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ModalPaper>
+              <Typography component="h2" variant="h6">
+                Show Columns
+              </Typography>
+              <IconButton
+                aria-label="close"
+                className="closeModalIcon"
+                onClick={handleColumnClose}
+              >
+                <CloseIcon />
+              </IconButton>
+              {allColumns.map(column => (
+                <div key={column.id}>
+                  <FormControlLabel
+                    control={<Checkbox {...column.getToggleHiddenProps()} />}
+                    label={column.Header}
+                  />
+                </div>
+              ))}
+            </ModalPaper>
+          </Modal>
+          <StickyStyles>
+            <MuiTable component={Paper} {...getTableProps()}>
+              <TableHead>
+                {headerGroups.map(headerGroup => {
+                  const { key: headerGroupKey, ...headerGroupProps } =
+                    headerGroup.getHeaderGroupProps()
+                  return (
+                    <TableRow key={headerGroupKey} {...headerGroupProps}>
+                      {headerGroup.headers.map(column => (
                         <TableCell
-                          className={`${cell.column.Header}`}
-                          key={cellKey}
-                          {...cellProps}
+                          className={column.Header}
+                          key={column.id}
+                          {...(column.id === "selection"
+                            ? column.getHeaderProps()
+                            : column.getHeaderProps(
+                                column.getSortByToggleProps()
+                              ))}
                         >
-                          {cell.column.Header === "Cards Needed"
-                            ? computeQtyNeeded(cell)
-                            : null}
-                          {cell.column.Header === "Total Cost"
-                            ? computeTotalCost(cell)
-                            : null}
-                          {cell.column.Header === "Time Needed"
-                            ? computeTimeNeeded(cell)
-                            : null}
-                          <span>
-                            {cell.column.Header === "Rarity"
-                              ? grabImage(cell.value)
-                              : ""}
-                          </span>
-                          {cell.render("Cell")}
+                          {column.render("Header")}
+                          {column.id !== "selection" ? (
+                            <TableSortLabel
+                              active={column.isSorted}
+                              // react-table has a unsorted state which is not treated here
+                              direction={column.isSortedDesc ? "desc" : "asc"}
+                            />
+                          ) : null}
                         </TableCell>
-                      )
-                    })}
-                  </TableRow>
-                )
-              })}
-            </TableBody>
-          </MuiTable>
-        </StickyStyles>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[25]}
-        component="div"
-        count={count}
-        rowsPerPage={25}
-        page={page - 1}
-        onPageChange={handlePageChange}
-      />
-    </Paper>
+                      ))}
+                    </TableRow>
+                  )
+                })}
+              </TableHead>
+              <TableBody className="body">
+                {rows.map((row, i) => {
+                  prepareRow(row)
+                  return (
+                    <TableRow key={row.id} {...row.getRowProps()}>
+                      {row.cells.map(cell => {
+                        const { key: cellKey, ...cellProps } =
+                          cell.getCellProps()
+                        return (
+                          <TableCell
+                            className={`${cell.column.Header}`}
+                            key={cellKey}
+                            {...cellProps}
+                          >
+                            {cell.column.Header === "Cards Needed"
+                              ? computeQtyNeeded(cell)
+                              : null}
+                            {cell.column.Header === "Total Cost"
+                              ? computeTotalCost(cell)
+                              : null}
+                            {cell.column.Header === "Time Needed"
+                              ? computeTimeNeeded(cell)
+                              : null}
+                            <span>
+                              {cell.column.Header === "Rarity"
+                                ? grabImage(cell.value)
+                                : ""}
+                            </span>
+                            {cell.render("Cell")}
+                          </TableCell>
+                        )
+                      })}
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </MuiTable>
+          </StickyStyles>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[25]}
+          component="div"
+          count={count}
+          rowsPerPage={25}
+          page={page - 1}
+          onPageChange={handlePageChange}
+        />
+      </Paper>
+    </>
   )
 }
 

@@ -27,6 +27,7 @@ import { useTable, useSortBy } from "react-table"
 import LoaderBaseball from "../LoaderBaseball"
 import Image from "next/image"
 import FullscreenIcon from "@mui/icons-material/Fullscreen"
+import FullscreenExitIcon from "@mui/icons-material/FullscreenExit"
 import { getSortFilterValue } from "@features/tables/utils/table-data-utils"
 
 const Paper = styled(MuiPaper)(spacing)
@@ -311,8 +312,7 @@ const FlippingTable = ({
             onClick={handleColumnOpen}
             style={{ marginRight: "1rem" }}
           >
-            <ViewWeekIcon style={{ marginRight: ".5rem" }} />
-            Columns
+            <ViewWeekIcon />
           </Button>
           <Button
             variant="filled"
@@ -320,7 +320,7 @@ const FlippingTable = ({
             onClick={handleFilterOpen}
             style={{ marginRight: "1rem" }}
           >
-            <FilterListIcon style={{ marginRight: ".5rem" }} /> Filters
+            <FilterListIcon />
           </Button>
           <Button
             style={{ marginRight: "1rem", marginTop: ".5rem" }}
@@ -328,7 +328,7 @@ const FlippingTable = ({
             size="sm"
             onClick={refreshData}
           >
-            <RefreshIcon style={{ marginRight: ".5rem" }} /> Refresh
+            <RefreshIcon />
           </Button>
           {currentUserIsSilverPlus ? (
             <Button
@@ -337,13 +337,21 @@ const FlippingTable = ({
               size="sm"
               onClick={goFullscreen}
             >
-              <FullscreenIcon style={{ marginRight: ".5rem" }} /> Fullscreen
+              {fullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
             </Button>
           ) : (
             ""
           )}
         </div>
       </Toolbar>
+      <TablePagination
+        rowsPerPageOptions={[25]}
+        component="div"
+        count={count}
+        rowsPerPage={25}
+        page={page - 1}
+        onPageChange={handlePageChange}
+      />
       <TableContainer>
         <Modal
           open={openColumns}

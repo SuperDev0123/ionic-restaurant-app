@@ -35,6 +35,7 @@ import axios from "axios"
 import LoadingButton from "@mui/lab/LoadingButton"
 import SaveIcon from "@mui/icons-material/Save"
 import FullscreenIcon from "@mui/icons-material/Fullscreen"
+import FullscreenExitIcon from "@mui/icons-material/FullscreenExit"
 import MLBColours from "./mlbColors.json"
 import { getSortFilterValue } from "@features/tables/utils/table-data-utils"
 import { ToastContainer, toast } from "react-toastify"
@@ -365,10 +366,10 @@ const TableCompare = ({
             onClick={() => downloadCSV()}
             style={{ marginRight: "1rem", marginTop: ".5rem" }}
           >
-            <DownloadIcon style={{ marginRight: ".5rem" }} />
+            <DownloadIcon />
             {Object.keys(selectedRowIds).length > 0
               ? `Download Selected (${Object.keys(selectedRowIds).length})`
-              : `Download`}
+              : ``}
           </Button>
         )
       }
@@ -478,6 +479,7 @@ const TableCompare = ({
                 value={inventoryType}
                 onChange={handleInventoryTypeChange}
               >
+                <MenuItem value="all">All</MenuItem>
                 <MenuItem value="owned">Owned Inventory</MenuItem>
                 <MenuItem value="not-owned">Not Owned Inventory</MenuItem>
               </Select>
@@ -488,21 +490,20 @@ const TableCompare = ({
           <div>
             {DownloadCSVButton()}
             <Button
-              variant="filled"
               size="sm"
+              variant="filled"
               onClick={handleColumnOpen}
               style={{ marginRight: "1rem", marginTop: ".5rem" }}
             >
-              <ViewWeekIcon style={{ marginRight: ".5rem" }} />
-              Columns
+              <ViewWeekIcon />
             </Button>
             <Button
-              variant="filled"
               size="sm"
+              variant="filled"
               onClick={handleFilterOpen}
               style={{ marginRight: "1rem", marginTop: ".5rem" }}
             >
-              <FilterListIcon style={{ marginRight: ".5rem" }} /> Filters
+              <FilterListIcon />
             </Button>
             <Button
               style={{ marginRight: "1rem", marginTop: ".5rem" }}
@@ -510,7 +511,7 @@ const TableCompare = ({
               size="sm"
               onClick={comparePlayers}
             >
-              <CompareIcon style={{ marginRight: ".5rem" }} /> Compare
+              <CompareIcon />
             </Button>
             {currentUserIsSilverPlus ? (
               <Button
@@ -519,7 +520,7 @@ const TableCompare = ({
                 size="sm"
                 onClick={goFullscreen}
               >
-                <FullscreenIcon style={{ marginRight: ".5rem" }} /> Fullscreen
+                {fullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
               </Button>
             ) : (
               ""

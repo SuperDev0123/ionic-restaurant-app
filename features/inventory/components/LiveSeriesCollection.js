@@ -2,16 +2,12 @@ import { useState, useEffect, useCallback } from "react"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 import { styled, spacing } from "@mui/system"
-import { Doughnut } from "react-chartjs-2"
 import LoaderBaseballInline from "@components/LoaderBaseball/LoaderBaseballInline"
-import {
-  Card as MuiCard,
-  CardContent,
-  // Typography as MuiTypography,
-  // Divider as MuiDivider,
-} from "@mui/material"
+import { Card as MuiCard, CardContent } from "@mui/material"
 import axios from "axios"
-
+import Donut from "@components/Charts/Donut"
+import DonutBlank from "@components/Charts/DonutBlank"
+ 
 const Card = styled(MuiCard)(spacing)
 
 const Blur = styled("span")`
@@ -19,65 +15,8 @@ const Blur = styled("span")`
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 `
 
-const BlankDoughnut = props => (
-  <div
-    style={{
-      position: "relative",
-      textAlign: "center",
-      width: "150px",
-      margin: "1rem auto",
-    }}
-  >
-    <Doughnut
-      data={{
-        labels: ["Owned", "Not Owned"],
-        datasets: [
-          {
-            data: [0, 1],
-            backgroundColor: ["#ed2024", "#EEE"],
-            // hoverBackgroundColor: [
-            //   "#FF6384",
-            //   "#36A2EB",
-            // ],
-          },
-        ],
-      }}
-      options={{
-        cutout: 50,
-        plugins: {
-          legend: {
-            display: false,
-          },
-          title: {
-            display: false,
-          },
-          tooltip: {
-            enabled: false,
-          },
-        },
-      }}
-    />
-    <Typography
-      sx={{
-        position: "absolute",
-        top: "58px",
-        left: "33px",
-        letterSpacing: "-2px",
-        width: "85px",
-      }}
-      variant="h2"
-      display="block"
-    >
-      0%
-    </Typography>
-    <Typography variant="overline" display="block">
-      Completion in {props.text}
-    </Typography>
-  </div>
-)
-
-const LiveSeriesCollection = (props) => {
-  const [liveSeriesDataIsLoading, setLiveSeriesDataIsLoading] = useState(false)
+const LiveSeriesCollection = props => {
+  const [liveSeriesDataIsLoading, setLiveSeriesDataIsLoading] = useState(true)
   const [inventoryLiveSeriesData, setInventoryLiveSeriesData] = useState([])
 
   const fetchData = useCallback(async () => {
@@ -88,7 +27,9 @@ const LiveSeriesCollection = (props) => {
       )
       .then(async getUserInventoryLiveSeriesData => {
         if (getUserInventoryLiveSeriesData.data) {
-          setInventoryLiveSeriesData(getUserInventoryLiveSeriesData.data.results[0])
+          setInventoryLiveSeriesData(
+            getUserInventoryLiveSeriesData.data.results[0]
+          )
           setLiveSeriesDataIsLoading(false)
         } else {
           setLiveSeriesDataIsLoading(false)
@@ -99,8 +40,15 @@ const LiveSeriesCollection = (props) => {
       })
   }, [props.currentUser?.uid])
 
-  useEffect(() => { fetchData(); }, [fetchData])
-  
+  const seriesCards = [
+    inventoryLiveSeriesData?.owned_live_series_count,
+    1200 - inventoryLiveSeriesData?.owned_live_series_count,
+  ]
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
+
   return (
     <>
       {!liveSeriesDataIsLoading ? (
@@ -110,10 +58,10 @@ const LiveSeriesCollection = (props) => {
               Live Series Collection
             </Typography>
             <Grid container spacing={6}>
-              <Grid item xs={12} md={6}>
-                <Grid container spacing={3}>
+              <Grid item xs={12} md={5}>
+                <Grid container spacing={6}>
                   <Grid item xs={12}>
-                    <Typography>
+                    <Typography paragraph>
                       {!props.inventoryExists
                         ? "You don't have a saved inventory. Follow the instructions above to get started."
                         : props.inventoryExists && !props.currentUserIsGoldPlus
@@ -243,146 +191,50 @@ const LiveSeriesCollection = (props) => {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid
-                item
-                xs={12}
-                md={6}
-                sx={{ display: "flex", flexWrap: "wrap" }}
-              >
-                {props.inventoryExists ? (
-                  <div
-                    style={{
-                      position: "relative",
-                      textAlign: "center",
-                      width: "150px",
-                      margin: "1rem auto",
-                    }}
-                  >
-                    <Doughnut
-                      data={{
-                        labels: ["Owned", "Not Owned"],
-                        datasets: [
-                          {
-                            data: [
-                              inventoryLiveSeriesData?.owned_live_series_count,
-                              1200 -
-                                inventoryLiveSeriesData?.owned_live_series_count,
-                            ],
-                            backgroundColor: ["#ed2024", "#EEE"],
-                            // hoverBackgroundColor: [
-                            //   "#FF6384",
-                            //   "#36A2EB",
-                            // ],
-                          },
-                        ],
-                      }}
-                      options={{
-                        cutout: 50,
-                        plugins: {
-                          //   tooltip: {
-                          //     enabled: false,
-                          //   },
-                          legend: {
-                            display: false,
-                          },
-                          title: {
-                            display: false,
-                          },
-                        },
-                      }}
-                    />
-                    <Typography
-                      sx={{
-                        position: "absolute",
-                        top: "58px",
-                        left: "33px",
-                        letterSpacing: "-2px",
-                        width: "85px",
-                      }}
-                      variant="h2"
-                      display="block"
-                    >
-                      {Math.round(
-                        inventoryLiveSeriesData?.completed_live_series_count_percentage
-                      )}
-                      %
-                    </Typography>
-                    <Typography variant="overline" display="block">
-                      Completion in Cards
-                    </Typography>
-                  </div>
-                ) : (
-                  <BlankDoughnut text="Cards" />
-                )}
-                {props.inventoryExists ? (
-                  <div
-                    style={{
-                      position: "relative",
-                      textAlign: "center",
-                      width: "150px",
-                      margin: "1rem auto",
-                    }}
-                  >
-                    <Doughnut
-                      data={{
-                        labels: ["Owned", "Not Owned"],
-                        datasets: [
-                          {
-                            data: [
-                              Math.round(
-                                inventoryLiveSeriesData?.completed_live_series_cost_percentage
-                              ),
-                              100 -
-                                Math.round(
-                                  inventoryLiveSeriesData?.completed_live_series_cost_percentage
-                                ),
-                            ],
-                            backgroundColor: ["#ed2024", "#EEE"],
-                            // hoverBackgroundColor: [
-                            //   "#FF6384",
-                            //   "#36A2EB",
-                            // ],
-                          },
-                        ],
-                      }}
-                      options={{
-                        cutout: 50,
-                        plugins: {
-                          legend: {
-                            display: false,
-                          },
-                          title: {
-                            display: false,
-                          },
-                          tooltip: {
-                            enabled: false,
-                          },
-                        },
-                      }}
-                    />
-                    <Typography
-                      sx={{
-                        position: "absolute",
-                        top: "58px",
-                        left: "33px",
-                        letterSpacing: "-2px",
-                        width: "85px",
-                      }}
-                      variant="h2"
-                      display="block"
-                    >
-                      {Math.round(
-                        inventoryLiveSeriesData?.completed_live_series_cost_percentage
-                      )}
-                      %
-                    </Typography>
-                    <Typography variant="overline" display="block">
-                      Completion in Stubs
-                    </Typography>
-                  </div>
-                ) : (
-                  <BlankDoughnut text="Stubs" />
-                )}
+              <Grid item xs={12} md={7}>
+                <Grid container spacing={6}>
+                  <Grid item xs={12} md={6}>
+                    {props.inventoryExists && !liveSeriesDataIsLoading  ? (
+                      <Donut
+                        series={seriesCards}
+                        title="Completion in Cards"
+                        labels={["Owned", "Not Owned"]}
+                        totalFormatter={function () {
+                          return (
+                            Math.round(
+                              (inventoryLiveSeriesData?.owned_live_series_count /
+                                1200) *
+                                100
+                            ) + "%"
+                          )
+                        }}
+                      />
+                    ) : (
+                      <DonutBlank title="Completion in Cards" />
+                    )}
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    {props.inventoryExists && !liveSeriesDataIsLoading ? (
+                      <Donut
+                        series={seriesCards}
+                        title="Completion in Stubs"
+                        labels={["Owned", "Not Owned"]}
+                        totalFormatter={function () {
+                          return (
+                            Math.round(
+                              (inventoryLiveSeriesData?.owned_live_series_count /
+                                1200) *
+                                100
+                            ) + "%"
+                          )
+                        }}
+                        type="donut"
+                      />
+                    ) : (
+                      <DonutBlank title="Completion in Stubs" />
+                    )}
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </CardContent>

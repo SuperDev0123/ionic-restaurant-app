@@ -27,6 +27,7 @@ const PerfectScrollbar = styled(ReactPerfectScrollbar)`
 const Items = styled("div")`
   padding-top: ${props => props.theme.spacing(2.5)};
   padding-bottom: ${props => props.theme.spacing(2.5)};
+  text-transform: uppercase;
 `
 
 const SmallNav = styled("div")`

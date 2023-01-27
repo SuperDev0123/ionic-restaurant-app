@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import ExchangeTable from "@components/Table/ExchangeTable"
 import useTableDefinition from "@features/tables/hooks/use-table-definition"
 import useTableData from "@features/tables/hooks/use-table-data"
-import PlayerExchangesFilterModal from "./PlayerExchangesFilterModal"
+import FiltersModal, { FiltersSubsetUtil } from "@components/FiltersModal"
 
 const TABLE_DATA_SOURCE_URI = "https://api.showzone.io/api/market-listings/?item_type=Player"
 
@@ -26,7 +26,8 @@ const PlayerExchanges = () => {
 
   return (
     <>
-      <PlayerExchangesFilterModal
+      <FiltersModal
+        subset={FiltersSubsetUtil.EXCHANGE}
         isOpen={openFilters}
         onClose={handleFilterClose}
         columnsData={columnsData}

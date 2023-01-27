@@ -4,11 +4,9 @@ import { useRouter } from "next/router"
 import AdBlock from "@components/AdBlock"
 import RevueSignUp from "@components/Widgets/NewsletterSignUp"
 import { styled } from "@mui/system"
-import FlippingPlayers from "../Widgets/FlippingPlayers"
-import Posts from "@features/home-page/components/PostsSlider/Posts"
 import CardTop from "@components/Typography/CardTop"
 import RelatedContent from "@components/Widgets/RelatedContent"
-import axios from "axios"
+import BestCardsToFlipSlider from "@components/PlayerSliders/BestCardsToFlipSlider"
 
 const Grid = styled(MuiGrid)`
   ${props => props.theme.breakpoints.up("lg")} {
@@ -59,7 +57,7 @@ function GenericSidebar(props) {
         />
 
         <CardTop smallText="Best Cards to" text="Flip Right Now" />
-        <FlippingPlayers />
+        <BestCardsToFlipSlider small />
       </Grid>
     </>
   )
