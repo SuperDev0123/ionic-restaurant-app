@@ -7,24 +7,21 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/navigation"
 import { Autoplay, Navigation } from "swiper"
-import axios from "axios"
+import { CapacitorHttp } from "@capacitor/core"
 
-const BestCardsToFlipSlider = ({ small, data }) => {
+const BestCardsToFlipSlider = ({ small }) => {
   const [players, setPlayers] = useState([])
 
   const fetchData = useCallback(async () => {
-    let results = await axios.get(
-      `https://api.showzone.io/api/player-profiles/?format=json&game=MLB%20The%20Show%2022&order_by=desc%20marketlisting__profit_minute&min_buy=1`
-    )
-    setPlayers(results.data.results)
+    let options = {
+        url: "https://api.showzone.io/api/player-profiles/?format=json&game=MLB%20The%20Show%2022&order_by=desc%20marketlisting__profit_minute&min_buy=1",
+      }
+      const response = await CapacitorHttp.request({ ...options, method: 'GET' })
+      setPlayers(response.data.results)
   })
 
   useEffect(() => {
-    if (!data) {
-      fetchData()
-    } else {
-      setPlayers(data)
-    }
+    fetchData()
   }, [])
 
   const Styles = styled("div")`

@@ -4,14 +4,20 @@ import Image from "next/image"
 import { useRouter } from "next/router"
 import { styled } from "@mui/system"
 import { withTheme } from "@mui/styles"
+// import { darken } from "polished"
+// import Button from "@mui/material/Button"
+// import Box from "@mui/material/Box"
+// import Grow from "@mui/material/Grow"
 import Grid from "@mui/material/Grid"
 import Hidden from "@mui/material/Hidden"
+// import InputBase from "@mui/material/InputBase"
 import Link from "@components/OurLink"
 import MuiAppBar from "@mui/material/AppBar"
+// import Popper from "@mui/material/Popper"
 import Menu from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
 import MuiIconButton from "@mui/material/IconButton"
-import MuiToolbar from "@mui/material/Toolbar"
+import Toolbar from "@mui/material/Toolbar"
 import ListItemButton from "@mui/material/ListItemButton"
 import MenuIcon from "@mui/icons-material/Menu"
 import NavbarUserDropdown from "./NavbarUserDropdown"
@@ -20,16 +26,11 @@ import NavBarMainMenu from "./NavBarMainMenu"
 import dashboardItems from "../Sidebar/dashboardItems"
 
 const AppBar = styled(MuiAppBar)`
-  border-top: 5px solid ${props => props.theme.palette.primary.main};
-  background: ${props => props.theme.palette.primary.main};
   color: ${props => props.theme.header.color};
+  border-top: 5px solid ${props => props.theme.palette.primary.main};
   padding-top: env(safe-area-inset-top);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
-`
-
-const Toolbar = styled(MuiToolbar)`
-  color: ${props => props.theme.header.color};
 `
 
 const IconButton = styled(MuiIconButton)`
@@ -74,7 +75,7 @@ const Navbar = ({ onDrawerToggle }) => {
   return (
     <React.Fragment>
       <AppBar position="fixed" elevation={0}>
-        <Toolbar style={{background: "#1c1c1c"}}>
+        <Toolbar>
           <Grid container alignItems="center">
             <Hidden xlUp>
               <Grid item>
