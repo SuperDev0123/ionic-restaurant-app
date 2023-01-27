@@ -1,7 +1,7 @@
 ## Create Mobile Apps
 npm run static
-npm cap sync
-npm open ios / npm open android
+npx cap sync
+npx open ios / npx open android
 
 ## Getting Started
 First, run the development server:
