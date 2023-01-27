@@ -113,7 +113,7 @@ function HomePage() {
 
 export default HomePage
 
-export const getServerSideProps = getHomeplateProps
+// export const getServerSideProps = getHomeplateProps
 
 export async function getStaticProps() {
   const results = await Promise.all(
