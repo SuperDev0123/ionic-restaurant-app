@@ -66,7 +66,7 @@ const defaultVariant = {
   },
   header: {
     color: grey[300],
-    background: showzoneGreyDark,
+    background: showzoneRed,
     search: {
       color: grey[200],
     },

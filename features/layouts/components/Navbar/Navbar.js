@@ -75,7 +75,7 @@ const Navbar = ({ onDrawerToggle }) => {
   return (
     <React.Fragment>
       <AppBar position="fixed" elevation={0}>
-        <Toolbar>
+        <Toolbar style={{background: "#1c1c1c"}}>
           <Grid container alignItems="center">
             <Hidden xlUp>
               <Grid item>
