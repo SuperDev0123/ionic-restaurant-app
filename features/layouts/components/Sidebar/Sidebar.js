@@ -28,6 +28,10 @@ const Brand = styled(ListItemButton)`
   justify-content: center;
   cursor: pointer;
   flex-grow: 0;
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-right);
   img {
     height: 24px;
   }

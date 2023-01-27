@@ -37,7 +37,8 @@ function MyApp(props) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"></meta>
+
+        <meta name="viewport" content="initial-scale=1, width=device-width viewport-fit=cover" />
         <meta property="og:image" content={previewImage} key="ogimage" />
       </Head>
       <ThemeProvider theme={createTheme(themeName)}>

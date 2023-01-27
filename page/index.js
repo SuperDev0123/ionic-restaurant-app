@@ -113,24 +113,24 @@ function HomePage() {
 
 export default HomePage
 
-// export const getServerSideProps = getHomeplateProps
+export const getServerSideProps = getHomeplateProps
 
-// export async function getStaticProps() {
-//   const results = await Promise.all(
-//     [
-//       `https://content.showzone.io/wp-json/wp/v2/posts?per_page=6&tags=2`,
-//       `https://api.showzone.io/api/player-profiles/?format=json&game=MLB The Show 22&order_by=desc%20playerprofileadvanced__overall_true`,
-//     ].map(url => fetch(url))
-//   )
-//   const [homeplatePosts, highestRatedCards] = await Promise.all(
-//     results.map(result => result.json())
-//   )
+export async function getStaticProps() {
+  const results = await Promise.all(
+    [
+      `https://content.showzone.io/wp-json/wp/v2/posts?per_page=6&tags=2`,
+      `https://api.showzone.io/api/player-profiles/?format=json&game=MLB The Show 22&order_by=desc%20playerprofileadvanced__overall_true`,
+    ].map(url => fetch(url))
+  )
+  const [homeplatePosts, highestRatedCards] = await Promise.all(
+    results.map(result => result.json())
+  )
 
-//   return {
-//     props: {
-//       homeplatePosts,
-//       highestRatedCards,
-//     },
-//     revalidate: 5 * 60, // Revalidate every 5 minutes
-//   }
-// }
+  return {
+    props: {
+      homeplatePosts,
+      highestRatedCards,
+    },
+    revalidate: 5 * 60, // Revalidate every 5 minutes
+  }
+}
