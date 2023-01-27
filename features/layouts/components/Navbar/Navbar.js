@@ -28,6 +28,9 @@ import dashboardItems from "../Sidebar/dashboardItems"
 const AppBar = styled(MuiAppBar)`
   color: ${props => props.theme.header.color};
   border-top: 5px solid ${props => props.theme.palette.primary.main};
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 `
 
 const IconButton = styled(MuiIconButton)`
