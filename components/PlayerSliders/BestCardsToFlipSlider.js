@@ -14,7 +14,7 @@ const BestCardsToFlipSlider = ({ small }) => {
 
   const fetchData = useCallback(async () => {
     let options = {
-        url: "https://api.showzone.io/api/player-profiles/?format=json&game=MLB%20The%20Show%2022&order_by=desc%20marketlisting__profit_minute&min_buy=1",
+        url: "https://api.showzone.io/api/player-profiles/?format=json&game=MLB The Show 22&order_by=desc marketlisting__profit_minute&min_buy=1",
       }
       const response = await CapacitorHttp.request({ ...options, method: 'GET' })
       setPlayers(response.data.results)
