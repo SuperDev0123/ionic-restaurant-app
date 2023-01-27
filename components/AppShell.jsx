@@ -4,7 +4,7 @@ import { Redirect, Route, BrowserRouter as Router } from 'react-router-dom';
 import HomePage from 'page/index';
 import ContactPage from 'page/contact';
 import SignInForm from '@features/auth/components/SignInForm';
-
+import ArchiveNewsGallery from '@features/news/components/ArchiveNewsGallery'
 setupIonicReact({});
 
 const AppShell = () => {
@@ -13,6 +13,7 @@ const AppShell = () => {
       <Route exact path="/" render={() =><HomePage/>} />
       <Route exact path="/login" render={() =><SignInForm/>} />
       <Route exact path="/profile" render={() =><HomePage/>} />
+      <Route exact path="/news" render={() =><ArchiveNewsGallery/>} />
       <Route exact path="/contact" render={() => <ContactPage />} />
     </Router>
           

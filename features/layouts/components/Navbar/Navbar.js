@@ -28,7 +28,10 @@ import { Box } from "@mui/material"
 const AppBar = styled(MuiAppBar)`
   color: ${props => props.theme.header.color};
   border-top: 5px solid ${props => props.theme.palette.primary.main};
-  margin-top: 28px;
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-right);
 `
 
 const IconButton = styled(MuiIconButton)`
@@ -37,12 +40,6 @@ const IconButton = styled(MuiIconButton)`
     height: 22px;
   }
 `
-const Header = styled(Box)({
-    height: "50px",
-    width: "100%",
-    backgroundColor: "#ed2024",
-    zIndex: 1100,
-})
 
 const Brand = styled(ListItemButton)`
   font-size: ${props => props.theme.typography.h5.fontSize};
@@ -79,7 +76,6 @@ const Navbar = ({ onDrawerToggle }) => {
 
   return (
     <React.Fragment>
-      <Header position="fixed" elevation={0}></Header>
       <AppBar position="fixed" elevation={0}>
         <Toolbar>
           <Grid container alignItems="center">
