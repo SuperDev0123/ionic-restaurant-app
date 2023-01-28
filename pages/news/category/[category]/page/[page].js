@@ -2,15 +2,15 @@ import React, { useState, useCallback, useEffect } from "react"
 import Head from "next/head"
 import { useRouter } from "next/router"
 import Grid from "@mui/material/Grid"
-import ArchiveNewsGallery from "../../../features/news/components/ArchiveNewsGallery"
+import ArchiveNewsGallery from "@features/news/components/ArchiveNewsGallery"
 import LoaderBaseball from "@components/LoaderBaseball"
 import SidebarGeneric from "@components/SidebarGeneric"
 import SectionHeader from "@components/Typography/SectionHeader"
-import { getOGUrl } from "../../../features/og-image/utils"
+import { getOGUrl } from "@features/og-image/utils"
 
 const REVALIDATION_MINS = 60 * 6
 
-function NewsArchivePage({ posts, totalPages, page }) {
+function NewsArchivePage({ posts, totalPages, page, category }) {
   const router = useRouter()
   const [sidebarHidden, setSidebarHidden] = useState(false)
 
@@ -45,10 +45,10 @@ function NewsArchivePage({ posts, totalPages, page }) {
       <SectionHeader
         breadcrumbsItems={[
           { name: "Homeplate", href: "/" },
-          { name: "News & Tips" },
+          { name: "News & Tips", href: "/news" },
         ]}
-        smallText="MLB The Show"
-        title="News & Tips"
+        smallText="MLB The Show News & Tips"
+        title={category.replace(/-/g, " ")}
       />
       <Grid container spacing={12} justifyContent="space-between">
         <Grid sx={{ maxWidth: "100%", width: "calc(100% - 350px)" }} item xs>
@@ -66,9 +66,9 @@ function NewsArchivePage({ posts, totalPages, page }) {
 
 export default NewsArchivePage
 
-export async function getStaticProps({ params: { page } }) {
+export async function getStaticProps({ params: { category, page } }) {
   const archivePostsRes = await fetch(
-    `https://content.showzone.io/wp-json/wp/v2/posts?page=${page}`
+    `https://content.showzone.io/wp-json/wp/v2/posts?category_slug=${category}&page=${page}`
   )
 
   const archivePosts = await archivePostsRes.json()
@@ -77,6 +77,7 @@ export async function getStaticProps({ params: { page } }) {
     props: {
       posts: archivePosts,
       page,
+      category,
       totalPages: archivePostsRes.headers.get("x-wp-totalpages"),
     },
     revalidate: REVALIDATION_MINS * 60,
@@ -85,7 +86,7 @@ export async function getStaticProps({ params: { page } }) {
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { page: "1" } }],
+    paths: [{ params: { category: "1", page: "1" } }],
     fallback: true,
   }
 }
