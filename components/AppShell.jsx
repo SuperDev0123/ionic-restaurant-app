@@ -9,7 +9,7 @@ import AdvertisingPage from 'page/advertising';
 import FlippingPage from 'page/flipping';
 import PlayersPage from 'page/players';
 import PlayersComparePage from 'page/players/compare';
-
+import QuirksPage from 'page/players/quirks';
 setupIonicReact({});
 
 const AppShell = () => {
@@ -25,6 +25,7 @@ const AppShell = () => {
 
       <Route exact path="/players" render={() => <PlayersPage />} />
       <Route exact path="/players/compare" render={() => <PlayersComparePage />} />
+      <Route exact path="/players/quirks" render={() => <QuirksPage />} />
       <Route exact path="/flipping" render={() => <FlippingPage />} />
     </Router>
           
