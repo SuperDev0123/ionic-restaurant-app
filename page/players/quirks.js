@@ -55,15 +55,3 @@ function QuirksPage() {
 }
 
 export default QuirksPage
-
-export async function getStaticProps() {
-  const quirksRes = await fetch(
-    ``
-  )
-  const quirks = await quirksRes.json()
-
-  return {
-    props: { quirks },
-    revalidate: REVALIDATION_MINS * 60,
-  }
-}
