@@ -11,6 +11,7 @@ import ExchangesPlayersPage from 'page/exchanges';
 import PlayersPage from 'page/players';
 import PlayersComparePage from 'page/players/compare';
 import QuirksPage from 'page/players/quirks';
+import ConquestMapsPage from 'page/conquest-maps';
 // import CollectionLiveSeriesPage from 'page/collections/live-series'
 // import Inventory from 'page/collections/tracker';
 
@@ -35,6 +36,8 @@ const AppShell = () => {
       
       <Route exact path="/flipping" render={() => <FlippingPage />} />
       <Route exact path="/exchanges" render={() => <ExchangesPlayersPage />} />
+
+      <Route exact path="/conquest-maps" render={() => <ConquestMapsPage />} />
 
       {/* <Route exact path="/collections/tracker" render={() => <Inventory />} />
       <Route exact path="/collections/live-series" render={() => <CollectionLiveSeriesPage />} /> */}
