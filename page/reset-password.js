@@ -17,9 +17,6 @@ const Wrapper = styled(Paper)`
 function resetPasswordPage() {
   return (
     <Wrapper>
-      <Head>
-        <title>Reset Password</title>
-      </Head>
       <Typography component="h1" variant="h3" align="center" gutterBottom>
         Reset Password
       </Typography>

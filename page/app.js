@@ -1,4 +1,3 @@
-import Head from "next/head"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 import SidebarGeneric from "@components/SidebarGeneric"
@@ -9,9 +8,6 @@ const googlePlayBadge = "/images/google-play-badge.png"
 function MobileAppPage() {
   return (
     <>
-      <Head>
-        <title>Mobile App - ShowZone</title>
-      </Head>
       <SectionHeader
         smallText="ShowZone on the Go"
         title="Mobile App"

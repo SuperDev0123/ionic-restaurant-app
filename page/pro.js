@@ -1,4 +1,3 @@
-import Head from "next/head"
 import { styled, spacing } from "@mui/system"
 import Typography from "@mui/material/Typography"
 import MuiBreadcrumbs from "@mui/material/Breadcrumbs"
@@ -69,9 +68,6 @@ const ProText = styled("div")`
 function ProPage() {
   return (
     <>
-      <Head>
-        <title>ShowZone Pro Membership - MLB The Show</title>
-      </Head>
       <Header>
         <Typography variant="h1" gutterBottom align="center">
           <Image

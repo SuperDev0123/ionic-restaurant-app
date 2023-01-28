@@ -1,8 +1,6 @@
-import Head from "next/head"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 import SectionHeader from "@components/Typography/SectionHeader"
-import Link from "@components/OurLink"
 import MuiPaper from "@mui/material/Paper"
 import { styled } from "@mui/system"
 
@@ -13,9 +11,6 @@ const Paper = styled(MuiPaper)`
 function AdvertisingPage() {
   return (
     <>
-      <Head>
-        <title>Advertising & Partnerships - ShowZone</title>
-      </Head>
       <SectionHeader
         smallText="Let's Work Together"
         title="Advertising & Partnerships"

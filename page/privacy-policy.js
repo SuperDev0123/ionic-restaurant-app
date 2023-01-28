@@ -1,4 +1,3 @@
-import Head from "next/head"
 import Grid from "@mui/material/Grid"
 // import Typography from "@mui/material/Typography"
 import Script from "next/script"
@@ -9,9 +8,6 @@ import SidebarGeneric from "@components/SidebarGeneric"
 function PrivacyPolicyPage() {
   return (
     <>
-      <Head>
-        <title>Privacy Policy - ShowZone</title>
-      </Head>
       <SectionHeader
         smallText="ShowZone"
         title="Privacy Policy"

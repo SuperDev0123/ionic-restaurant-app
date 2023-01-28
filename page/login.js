@@ -1,4 +1,3 @@
-import Head from "next/head"
 import { styled } from "@mui/system"
 import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
@@ -18,9 +17,6 @@ const Wrapper = styled(Paper)`
 function LoginPage() {
   return (
     <Wrapper>
-      <Head>
-        <title>Sign In</title>
-      </Head>
       <Typography component="h1" variant="h3" align="center" gutterBottom>
         Login to <span style={{ fontFamily: 'Road Rage', fontWeight: 400 }}>ShowZone Pro</span>
       </Typography>

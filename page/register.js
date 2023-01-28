@@ -18,9 +18,6 @@ const Wrapper = styled(Paper)`
 function RegisterPage() {
   return (
     <Wrapper>
-      <Head>
-        <title>Sign Up</title>
-      </Head>
       <Typography component="h1" variant="h3" align="center" gutterBottom>
         Register for <span style={{ fontFamily: 'Road Rage', fontWeight: 400 }}>ShowZone</span>
       </Typography>

@@ -7,6 +7,8 @@ import LoginPage from 'page/login';
 import MobileAppPage from 'page/app';
 import AdvertisingPage from 'page/advertising';
 import FlippingPage from 'page/flipping';
+import PlayersPage from 'page/players';
+import PlayersComparePage from 'page/players/compare';
 
 setupIonicReact({});
 
@@ -21,6 +23,8 @@ const AppShell = () => {
       <Route exact path="/app" render={() => <MobileAppPage />} />
       <Route exact path="/advertising" render={() => <AdvertisingPage />} />
 
+      <Route exact path="/players" render={() => <PlayersPage />} />
+      <Route exact path="/players/compare" render={() => <PlayersComparePage />} />
       <Route exact path="/flipping" render={() => <FlippingPage />} />
     </Router>
           

@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import Head from "next/head"
 import Chip from "@mui/material/Chip"
 import SectionHeader from "@components/Typography/SectionHeader"
 import CardBuilder from "../features/card-builder/components/CardBuilder/CardBuilder"
@@ -12,14 +11,6 @@ function CardBuilderPage() {
 
   return (
     <>
-      <Head>
-        <title>MLB The Show: Card Builder - ShowZone</title>
-        <meta
-          name="description"
-          content="Build your very own MLB The Show cards! Who will you create?!"
-        />
-      </Head>
-
       <SectionHeader
         smallText="MLB The Show"
         title="Card Builder"

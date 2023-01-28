@@ -123,26 +123,7 @@ function SectionHeader(props) {
               <span>{props.smallText + " "}</span>
               {props.title}
             </h1>
-            {props.shareButton ? (
-              <>
-                <Button onClick={getShareLink}>Share</Button>
-              </>
-            ) : (
-              ""
-            )}
           </Heading>
-          <ToastContainer
-            position="bottom-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-          />
         </>
       )}
     </Styles>

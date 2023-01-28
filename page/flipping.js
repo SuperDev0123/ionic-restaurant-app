@@ -36,15 +36,7 @@ function FlippingPage() {
   const { currentUserIsGoldPlus } = useAuth()
   return (
     <Styles>
-      <Head>
-        <title>MLB The Show: Market Listings - ShowZone</title>
-        <meta
-          name="description"
-          content="Find the best cards to flip in MLB The Show - make stubs fast!"
-        />
-      </Head>
       <SectionHeader
-        shareButton
         breadcrumbsItems={[
           { name: "Homeplate", href: "/" },
           { name: "Flipping" },
