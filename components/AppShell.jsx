@@ -12,6 +12,7 @@ import PlayersPage from 'page/players';
 import PlayersComparePage from 'page/players/compare';
 import QuirksPage from 'page/players/quirks';
 import ConquestMapsPage from 'page/conquest-maps';
+import CardBuilderPage from 'page/card-builder';
 // import CollectionLiveSeriesPage from 'page/collections/live-series'
 // import Inventory from 'page/collections/tracker';
 
@@ -38,6 +39,7 @@ const AppShell = () => {
       <Route exact path="/exchanges" render={() => <ExchangesPlayersPage />} />
 
       <Route exact path="/conquest-maps" render={() => <ConquestMapsPage />} />
+      <Route exact path="/card-builder" render={() => <CardBuilderPage />} />
 
       {/* <Route exact path="/collections/tracker" render={() => <Inventory />} />
       <Route exact path="/collections/live-series" render={() => <CollectionLiveSeriesPage />} /> */}
