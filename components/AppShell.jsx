@@ -13,6 +13,8 @@ import PlayersComparePage from 'page/players/compare';
 import QuirksPage from 'page/players/quirks';
 import ConquestMapsPage from 'page/conquest-maps';
 import CardBuilderPage from 'page/card-builder';
+import TrueOverallCalculator from 'page/calculators/true-overall';
+// import PackSimulatorStandard from 'page/pack-simulator/standard';
 // import CollectionLiveSeriesPage from 'page/collections/live-series'
 // import Inventory from 'page/collections/tracker';
 
@@ -40,6 +42,8 @@ const AppShell = () => {
 
       <Route exact path="/conquest-maps" render={() => <ConquestMapsPage />} />
       <Route exact path="/card-builder" render={() => <CardBuilderPage />} />
+      <Route exact path="/calculators/true-overall" render={() => <TrueOverallCalculator />} />
+      {/* <Route exact path="/pack-simulator/standard" render={() => <PackSimulatorStandard />} /> */}
 
       {/* <Route exact path="/collections/tracker" render={() => <Inventory />} />
       <Route exact path="/collections/live-series" render={() => <CollectionLiveSeriesPage />} /> */}

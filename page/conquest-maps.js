@@ -16,7 +16,6 @@ function ConquestMapsPage() {
       url: "https://content.showzone.io/wp-json/wp/v2/conquest?per_page=99",
     }
     const response = await CapacitorHttp.request({ ...options, method: "GET" })
-    console.log("*****", response.data)
     setData(response.data)
     setLoadingData(false)
   }
