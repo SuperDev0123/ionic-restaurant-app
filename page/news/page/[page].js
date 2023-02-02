@@ -66,26 +66,26 @@ function NewsArchivePage({ posts, totalPages, page }) {
 
 export default NewsArchivePage
 
-export async function getStaticProps({ params: { page } }) {
-  const archivePostsRes = await fetch(
-    `https://content.showzone.io/wp-json/wp/v2/posts?page=${page}`
-  )
+// export async function getStaticProps({ params: { page } }) {
+//   const archivePostsRes = await fetch(
+//     `https://content.showzone.io/wp-json/wp/v2/posts?page=${page}`
+//   )
 
-  const archivePosts = await archivePostsRes.json()
+//   const archivePosts = await archivePostsRes.json()
 
-  return {
-    props: {
-      posts: archivePosts,
-      page,
-      totalPages: archivePostsRes.headers.get("x-wp-totalpages"),
-    },
-    revalidate: REVALIDATION_MINS * 60,
-  }
-}
+//   return {
+//     props: {
+//       posts: archivePosts,
+//       page,
+//       totalPages: archivePostsRes.headers.get("x-wp-totalpages"),
+//     },
+//     revalidate: REVALIDATION_MINS * 60,
+//   }
+// }
 
-export async function getStaticPaths() {
-  return {
-    paths: [{ params: { page: "1" } }],
-    fallback: true,
-  }
-}
+// export async function getStaticPaths() {
+//   return {
+//     paths: [{ params: { page: "1" } }],
+//     fallback: true,
+//   }
+// }

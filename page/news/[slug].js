@@ -162,30 +162,30 @@ function SingleNewsPage({ post, relatedPosts, slug }) {
 
 export default SingleNewsPage
 
-export async function getStaticProps({ params: { slug } }) {
-  const postsRes = await fetch(
-    `https://content.showzone.io/wp-json/wp/v2/posts?_embed&slug=${slug}`
-  )
-  const [post] = await postsRes.json()
+// export async function getStaticProps({ params: { slug } }) {
+//   const postsRes = await fetch(
+//     `https://content.showzone.io/wp-json/wp/v2/posts?_embed&slug=${slug}`
+//   )
+//   const [post] = await postsRes.json()
 
-  const relatedPostsRes = await fetch(
-    `https://content.showzone.io/wp-json/wp/v2/posts/?exclude=${post.id}&categories=${post.categories}&_embed&per_page=6`
-  )
-  const relatedPosts = await relatedPostsRes.json()
+//   const relatedPostsRes = await fetch(
+//     `https://content.showzone.io/wp-json/wp/v2/posts/?exclude=${post.id}&categories=${post.categories}&_embed&per_page=6`
+//   )
+//   const relatedPosts = await relatedPostsRes.json()
 
-  return {
-    props: {
-      post,
-      slug,
-      relatedPosts,
-    },
-    revalidate: REVALIDATION_MINS * 60,
-  }
-}
+//   return {
+//     props: {
+//       post,
+//       slug,
+//       relatedPosts,
+//     },
+//     revalidate: REVALIDATION_MINS * 60,
+//   }
+// }
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  }
-}
+// export async function getStaticPaths() {
+//   return {
+//     paths: [],
+//     fallback: true,
+//   }
+// }
