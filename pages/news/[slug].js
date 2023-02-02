@@ -8,7 +8,7 @@ import MuiBreadcrumbs from "@mui/material/Breadcrumbs"
 import MuiDivider from "@mui/material/Divider"
 import Grid from "@mui/material/Grid"
 import parse from "html-react-parser"
-import NavLink from "../../components/OurNavLink"
+import NavLink from "@components/OurNavLink"
 import SingleNewsContent from "../../features/news/components/SingleNewsContent"
 import LoaderBaseball from "../../components/LoaderBaseball"
 import SidebarGeneric from "../../components/SidebarGeneric"
@@ -16,10 +16,18 @@ import { CapacitorHttp } from "@capacitor/core"
 
 const REVALIDATION_MINS = 6 * 60
 
-const Breadcrumbs = styled(MuiBreadcrumbs)(spacing)
+const Breadcrumbs = styled(MuiBreadcrumbs)`
+  margin-bottom: 0.25rem;
+  li,
+  p,
+  a {
+    font-size: 12px;
+    line-height: 1;
+  }
+`
 const Divider = styled(MuiDivider)(spacing)
 
-function SingleNewsPage({ post }) {
+function SingleNewsPage({ post, relatedPosts, slug }) {
   const router = useRouter()
   const [sidebarHidden, setSidebarHidden] = useState(false)
   const [slugPost, setSlug] = useState(null)

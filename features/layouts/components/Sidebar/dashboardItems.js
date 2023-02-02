@@ -123,33 +123,6 @@ const pagesSection = [
     // new: true,
   },
   {
-    href: "",
-    icon: WorkIcon,
-    title: "Services",
-    children: [
-      {
-        href: "/services/logos",
-        title: "Premium Logos",
-      },
-      //   {
-      //     href: "/services/stadiums",
-      //     title: "Premium Stadiums",
-      //   },
-      {
-        href: "/services/caps",
-        title: "Premium CAPs",
-      },
-      {
-        href: "/services/jerseys",
-        title: "Printed Jerseys",
-      },
-      {
-        href: "/services/enterprise",
-        title: "Enterprise Services",
-      },
-    ],
-  },
-  {
     href: "/merch",
     icon: ShoppingCartIcon,
     title: "",

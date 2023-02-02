@@ -1,4 +1,3 @@
-import Head from "next/head"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 import SectionHeader from "@components/Typography/SectionHeader"
@@ -13,9 +12,6 @@ const Paper = styled(MuiPaper)`
 function ContactPage() {
   return (
     <>
-      <Head>
-        <title>Contact - ShowZone</title>
-      </Head>
       <SectionHeader
         smallText="Get In Touch"
         title="Contact ShowZone"

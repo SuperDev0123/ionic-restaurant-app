@@ -2,28 +2,17 @@ import React, { useState } from "react"
 import Head from "next/head"
 import dynamic from "next/dynamic"
 import { styled } from "@mui/system"
-import Grid from "@mui/material/Grid"
-import SectionHeader from "@components/Typography/SectionHeader"
 import SidebarGeneric from "@components/SidebarGeneric"
-import MuiAccordion from "@mui/material/Accordion"
-import AccordionSummary from "@mui/material/AccordionSummary"
-import AccordionDetails from "@mui/material/AccordionDetails"
-import Typography from "@mui/material/Typography"
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import SectionHeader from "@components/Typography/SectionHeader"
+import { Grid } from "@mui/material"
 import NavLink from "@components/OurNavLink"
 import useAuth from "@useAuth"
 import Alert from "@mui/material/Alert"
 
-const MarketListings = dynamic(
-  () => import("../features/flippings/components/MarketListings"),
+const PlayerExchanges = dynamic(
+  () => import("../features/exchanges/components/PlayerExchanges"),
   { ssr: false }
 )
-
-const Accordion = styled(MuiAccordion)`
-  border-top: 3px solid ${props => props.theme.palette.primary.main};
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-`
 
 const Styles = styled("div")`
   tr {
@@ -31,18 +20,26 @@ const Styles = styled("div")`
   }
 `
 
-function FlippingPage() {
+function ExchangesPlayersPage() {
   const [sidebarHidden, setSidebarHidden] = useState(false)
   const { currentUserIsGoldPlus } = useAuth()
   return (
     <Styles>
+      <Head>
+        <title>MLB The Show: Player Exchanges - ShowZone</title>
+        <meta
+          name="description"
+          content="Find the fastest, cheapest or most effecient cards to exchange."
+        />
+      </Head>
       <SectionHeader
+        shareButton
         breadcrumbsItems={[
           { name: "Homeplate", href: "/" },
-          { name: "Flipping" },
+          { name: "Exchanges" },
         ]}
         smallText="MLB The Show"
-        title="Flipping"
+        title="Exchanges"
       />
       <Grid container spacing={12} justifyContent="space-between">
         <Grid sx={{ maxWidth: "100%", width: "calc(100% - 350px)" }} item xs>
@@ -66,12 +63,12 @@ function FlippingPage() {
               </NavLink>
             </Alert>
           )}
-          <MarketListings />
+          <PlayerExchanges />
         </Grid>
-        <SidebarGeneric relatedPostsCategory="22" relatedPostsText="Flipping" />
+        <SidebarGeneric sidebarHidden={sidebarHidden} />
       </Grid>
     </Styles>
   )
 }
 
-export default FlippingPage
+export default ExchangesPlayersPage

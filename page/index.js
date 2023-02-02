@@ -9,6 +9,7 @@ import ToolsResourcesButtons from "@components/Buttons/ToolsResourcesButtons"
 import TrueOverallSlider from "@components/PlayerSliders/TrueOverallSlider"
 import { CapacitorHttp } from "@capacitor/core"
 import Skeleton from "@mui/material/Skeleton"
+import BestCardsToFlipSlider from "@components/PlayerSliders/BestCardsToFlipSlider"
 
 const Spacer = styled("div")(spacing)
 
@@ -23,7 +24,7 @@ function HomePage() {
     let options = {
       url: "https://content.showzone.io/wp-json/wp/v2/posts?per_page=6&tags=2",
     }
-    const response = await CapacitorHttp.request({ ...options, method: 'GET' })
+    const response = await CapacitorHttp.request({ ...options, method: "GET" })
     setHomeplatePosts(response.data)
     setLoadingPosts(false)
   }
@@ -33,7 +34,7 @@ function HomePage() {
     let options = {
       url: "https://api.showzone.io/api/player-profiles/?game=MLB The Show 22&order_by=desc playerprofileadvanced__overall_true",
     }
-    const response = await CapacitorHttp.request({ ...options, method: 'GET' })
+    const response = await CapacitorHttp.request({ ...options, method: "GET" })
     setTopPlayers(response.data.results)
     setLoadingTopPlayers(false)
   }
@@ -105,6 +106,18 @@ function HomePage() {
             <TrueOverallSlider players={topPlayers} />
           )}
           <Spacer mb={20} />
+          <Grid container spacing={0}>
+            <Grid item xs={12}>
+              <SectionHeader
+                smallText="MLB The Show 22"
+                title="Best Cards to Flip"
+                h2
+              />
+            </Grid>
+          </Grid>
+
+          <BestCardsToFlipSlider />
+          <Spacer mb={20} />
         </Grid>
       </Grid>
     </>
@@ -112,25 +125,3 @@ function HomePage() {
 }
 
 export default HomePage
-
-// export const getServerSideProps = getHomeplateProps
-
-export async function getStaticProps() {
-  const results = await Promise.all(
-    [
-      `https://content.showzone.io/wp-json/wp/v2/posts?per_page=6&tags=2`,
-      `https://api.showzone.io/api/player-profiles/?format=json&game=MLB The Show 22&order_by=desc%20playerprofileadvanced__overall_true`,
-    ].map(url => fetch(url))
-  )
-  const [homeplatePosts, highestRatedCards] = await Promise.all(
-    results.map(result => result.json())
-  )
-
-  return {
-    props: {
-      homeplatePosts,
-      highestRatedCards,
-    },
-    revalidate: 5 * 60, // Revalidate every 5 minutes
-  }
-}

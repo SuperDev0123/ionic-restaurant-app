@@ -49,17 +49,35 @@ function NewsArchivePage({ posts, totalPages, page }) {
         <title>MLB The Show News and Tips</title>
         <meta
           name="description"
-          content="Get the latest MLB The Show news and tips here."
+          content="Get the latest MLB The Show news and tips."
+        />
+        <meta
+          property="og:title"
+          content="MLB The Show News & Tips"
+          key="ogtitle"
+        />
+        <meta
+          property="og:description"
+          content="Get the latest MLB The Show news and tips."
+          key="ogdescription"
+        />
+        <meta
+          property="og:image"
+          content={getOGUrl("default", {
+            title: "The Latest MLB The Show News & Tips",
+            smallText: "MLB The Show",
+          })}
+          key="ogimage"
         />
       </Head>
-      <Typography variant="h3" component="h1" gutterBottom display="inline">
-        News & Tips
-      </Typography>
-      <Breadcrumbs aria-label="Breadcrumb" mt={2}>
-        <NavLink href="/">Homeplate</NavLink>
-        <Typography>News & Tips</Typography>
-      </Breadcrumbs>
-      <Divider my={6} />
+      <SectionHeader
+        breadcrumbsItems={[
+          { name: "Homeplate", href: "/" },
+          { name: "News & Tips" },
+        ]}
+        smallText="MLB The Show"
+        title="News & Tips"
+      />
       <Grid container spacing={12} justifyContent="space-between">
         <Grid sx={{ maxWidth: "100%", width: "calc(100% - 350px)" }} item xs>
           
