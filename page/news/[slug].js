@@ -25,10 +25,12 @@ const Breadcrumbs = styled(MuiBreadcrumbs)`
 `
 const Divider = styled(MuiDivider)(spacing)
 
-function SingleNewsPage({ }) {
+function SingleNewsPage({}) {
   let { slug } = useParams()
   const [post, setPost] = useState("")
   const [loadingPost, setLoadingPost] = useState(true)
+  const [relatedPosts, setRelatedPosts] = useState("")
+  const [loadingRelatedPosts, setLoadingRelatedPosts] = useState(true)
 
   const getPost = async () => {
     setLoadingPost(true)
@@ -40,9 +42,26 @@ function SingleNewsPage({ }) {
     setLoadingPost(false)
   }
 
+  const getRelatedPosts = async () => {
+    setLoadingRelatedPosts(true)
+    let options = {
+      url: `https://content.showzone.io/wp-json/wp/v2/posts/?exclude=${post.id}&categories=${post.categories}&_embed&per_page=6`,
+    }
+    const response = await CapacitorHttp.request({ ...options, method: "GET" })
+    setRelatedPosts(response.data)
+    setLoadingRelatedPosts(false)
+  }
+
   useEffect(() => {
     getPost()
   }, [])
+
+  useEffect(() => {
+    if (post) {
+      getRelatedPosts()
+    }
+  }, [post])
+
   const BlogHero = styled("div")`
     display: flex;
     flex-direction: column;
@@ -105,7 +124,6 @@ function SingleNewsPage({ }) {
       <Divider my={6} />
       <Grid container spacing={12} justifyContent="space-between">
         <Grid sx={{ maxWidth: "100%", width: "calc(100% - 350px)" }} item xs>
-          {/* <SingleNewsContent post={post} relatedPosts={relatedPosts} /> */}
           {loadingPost ? (
             <Skeleton
               animation="wave"
@@ -114,7 +132,7 @@ function SingleNewsPage({ }) {
               height={300}
             />
           ) : (
-           <SingleNewsContent post={post} />
+            <SingleNewsContent post={post} relatedPosts={relatedPosts} />
           )}
         </Grid>
         <SidebarGeneric />
@@ -124,31 +142,3 @@ function SingleNewsPage({ }) {
 }
 
 export default SingleNewsPage
-
-// export async function getStaticProps({ params: { slug } }) {
-//   const postsRes = await fetch(
-//     `https://content.showzone.io/wp-json/wp/v2/posts?_embed&slug=${slug}`
-//   )
-//   const [post] = await postsRes.json()
-
-//   const relatedPostsRes = await fetch(
-//     `https://content.showzone.io/wp-json/wp/v2/posts/?exclude=${post.id}&categories=${post.categories}&_embed&per_page=6`
-//   )
-//   const relatedPosts = await relatedPostsRes.json()
-
-//   return {
-//     props: {
-//       post,
-//       slug,
-//       relatedPosts,
-//     },
-//     revalidate: REVALIDATION_MINS * 60,
-//   }
-// }
-
-// export async function getStaticPaths() {
-//   return {
-//     paths: [],
-//     fallback: true,
-//   }
-// }
