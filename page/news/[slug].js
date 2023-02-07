@@ -1,6 +1,4 @@
 import React, { useState, useCallback, useEffect } from "react"
-import Head from "next/head"
-import { useRouter } from "next/router"
 import { styled, spacing } from "@mui/system"
 import Container from "@mui/material/Container"
 import Typography from "@mui/material/Typography"
@@ -12,9 +10,9 @@ import NavLink from "@components/OurNavLink"
 import SingleNewsContent from "../../features/news/components/SingleNewsContent"
 import LoaderBaseball from "@components/LoaderBaseball"
 import SidebarGeneric from "@components/SidebarGeneric"
-import { getOGUrl } from "../../features/og-image/utils"
-
-const REVALIDATION_MINS = 6 * 60
+import { useParams } from "react-router-dom"
+import { Skeleton } from "@mui/material"
+import { CapacitorHttp } from "@capacitor/core"
 
 const Breadcrumbs = styled(MuiBreadcrumbs)`
   margin-bottom: 0.25rem;
@@ -27,8 +25,24 @@ const Breadcrumbs = styled(MuiBreadcrumbs)`
 `
 const Divider = styled(MuiDivider)(spacing)
 
-function SingleNewsPage({ post, relatedPosts, slug }) {
-  const router = useRouter()
+function SingleNewsPage({ }) {
+  let { slug } = useParams()
+  const [post, setPost] = useState("")
+  const [loadingPost, setLoadingPost] = useState(true)
+
+  const getPost = async () => {
+    setLoadingPost(true)
+    let options = {
+      url: `https://content.showzone.io/wp-json/wp/v2/posts?_embed&slug=${slug}`,
+    }
+    const response = await CapacitorHttp.request({ ...options, method: "GET" })
+    setPost(response.data[0])
+    setLoadingPost(false)
+  }
+
+  useEffect(() => {
+    getPost()
+  }, [])
   const BlogHero = styled("div")`
     display: flex;
     flex-direction: column;
@@ -64,69 +78,8 @@ function SingleNewsPage({ post, relatedPosts, slug }) {
     { name: post?.title?.rendered },
   ]
 
-  function addNewsSchema() {
-    return {
-      __html: `{
-        "@context": "https://schema.org",
-        "@type": "NewsArticle",
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://showzone.io/news/${slug}"
-        },
-        "headline": "${post?.title?.rendered}",
-        "image": [
-          "${post?.better_featured_image?.source_url}"
-        ],
-        "datePublished": "${post?.date}",
-        "dateModified": "${post?.modified}",
-        "author": {
-          "@type": "Person",
-          "name": "${post?._embedded?.author[0]?.name}"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "ShowZone",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://content.showzone.io/wp-content/uploads/2023/01/logo.png"
-          }
-        },
-        "description": "${post?.excerpt?.rendered}"
-    }
-  `,
-    }
-  }
-
-  if (router.isFallback) return <LoaderBaseball />
   return (
     <>
-      <Head>
-        <title> {parse(post?.title?.rendered)} - ShowZone</title>
-        <meta name="description" content={post?.excerpt?.rendered} />
-        <meta
-          property="og:title"
-          content={post?.title?.rendered}
-          key="ogtitle"
-        />
-        <meta
-          property="og:description"
-          content={post?.excerpt?.rendered}
-          key="ogdescription"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={addNewsSchema()}
-          key="news-jsonld"
-        />
-        <meta
-          property="og:image"
-          content={getOGUrl("default", {
-            title: post?.title?.rendered,
-            smallText: "News & Tips",
-          })}
-          key="ogimage"
-        />
-      </Head>
       <BlogHero>
         <Breadcrumbs aria-label="Breadcrumb" mt={2}>
           {breadcrumbsItems.map(({ name, href }) =>
@@ -152,7 +105,17 @@ function SingleNewsPage({ post, relatedPosts, slug }) {
       <Divider my={6} />
       <Grid container spacing={12} justifyContent="space-between">
         <Grid sx={{ maxWidth: "100%", width: "calc(100% - 350px)" }} item xs>
-          <SingleNewsContent post={post} relatedPosts={relatedPosts} />
+          {/* <SingleNewsContent post={post} relatedPosts={relatedPosts} /> */}
+          {loadingPost ? (
+            <Skeleton
+              animation="wave"
+              variant="rectangular"
+              width={"100%"}
+              height={300}
+            />
+          ) : (
+           <SingleNewsContent post={post} />
+          )}
         </Grid>
         <SidebarGeneric />
       </Grid>

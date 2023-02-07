@@ -6,7 +6,8 @@ import ContactPage from 'page/contact';
 import SignInForm from '@features/auth/components/SignInForm';
 import { StatusBar, Style } from '@capacitor/status-bar';
 // import ArchiveNewsGallery from '@features/news/components/ArchiveNewsGallery'
-import NewsArchivePage from 'pages/news/page/[page]';
+import NewsArchivePage from 'page/news/page/[page]';
+import SingleNewsPage from 'page/news/[slug]';
 import { useEffect } from 'react';
 import {Capacitor} from "@capacitor/core"
 import LoginPage from 'page/login';
@@ -44,10 +45,12 @@ const AppShell = () => {
       <Route exact path="/" render={() =><HomePage/>} />
       <Route exact path="/login" render={() =><LoginPage/>} />
       <Route exact path="/profile" render={() =><HomePage/>} />
-      <Route exact path="/news" render={() =><NewsArchivePage/>} />
       <Route exact path="/contact" render={() => <ContactPage />} />
       <Route exact path="/app" render={() => <MobileAppPage />} />
       <Route exact path="/advertising" render={() => <AdvertisingPage />} />
+
+      <Route exact path="/news/page/:page" render={() =><NewsArchivePage/>} />
+      <Route exact path="/news/:slug" render={() =><SingleNewsPage />} />
 
       <Route exact path="/players" render={() => <PlayersPage />} />
       <Route exact path="/players/compare" render={() => <PlayersComparePage />} />
