@@ -8,7 +8,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 // import ArchiveNewsGallery from '@features/news/components/ArchiveNewsGallery'
 import NewsArchivePage from 'pages/news/page/[page]';
 import { useEffect } from 'react';
-import {StatusBarStyleDark, Plugins} from "@capacitor/core"
+import {Capacitor} from "@capacitor/core"
 import LoginPage from 'page/login';
 import MobileAppPage from 'page/app';
 import AdvertisingPage from 'page/advertising';
@@ -25,13 +25,19 @@ import TrueOverallCalculator from 'page/calculators/true-overall';
 // import Inventory from 'page/collections/tracker';
 
 setupIonicReact({});
-
 const AppShell = () => {
   const setStatusBarStyleDark = async () => {
     await StatusBar.setStyle({ style: Style.Dark });
   };
-  useEffect(() => {
-    setStatusBarStyleDark();
+  useEffect(() => {  
+    try {
+      if (Capacitor.getPlatform() === 'ios') {
+        setStatusBarStyleDark();
+}     
+    } catch (err) {
+      console.log(err);
+    }
+    
   }, [])
   return (
     <Router>
