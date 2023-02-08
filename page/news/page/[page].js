@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useEffect } from "react"
-import { useRouter } from "next/router"
 import Grid from "@mui/material/Grid"
 import ArchiveNewsGallery from "../../../features/news/components/ArchiveNewsGallery"
 import LoaderBaseball from "@components/LoaderBaseball"

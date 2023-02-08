@@ -3,10 +3,9 @@ import { IonReactRouter } from '@ionic/react-router';
 import {Route, BrowserRouter as Router } from 'react-router-dom';
 import HomePage from 'page/index';
 import ContactPage from 'page/contact';
-import SignInForm from '@features/auth/components/SignInForm';
 import { StatusBar, Style } from '@capacitor/status-bar';
-// import ArchiveNewsGallery from '@features/news/components/ArchiveNewsGallery'
 import NewsArchivePage from 'page/news/page/[page]';
+import NewsArchiveCategoryPage from 'page/news/category/[category]/page/[page]';
 import SingleNewsPage from 'page/news/[slug]';
 import { useEffect } from 'react';
 import {Capacitor} from "@capacitor/core"
@@ -50,6 +49,7 @@ const AppShell = () => {
       <Route exact path="/advertising" render={() => <AdvertisingPage />} />
 
       <Route exact path="/news/page/:page" render={() =><NewsArchivePage/>} />
+      <Route exact path="/news/category/:category/page/:page" render={() =><NewsArchiveCategoryPage/>} />
       <Route exact path="/news/:slug" render={() =><SingleNewsPage />} />
 
       <Route exact path="/players" render={() => <PlayersPage />} />
