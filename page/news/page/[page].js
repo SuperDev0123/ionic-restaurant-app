@@ -13,6 +13,7 @@ function NewsArchivePage({}) {
   let { page } = useParams()
   const [posts, setPosts] = useState("")
   const [loadingPosts, setLoadingPosts] = useState(true)
+  const [totalPages, setTotalPages] = useState(1)
 
   const getPosts = async () => {
     setLoadingPosts(true)
@@ -21,6 +22,7 @@ function NewsArchivePage({}) {
     }
     const response = await CapacitorHttp.request({ ...options, method: "GET" })
     setPosts(response.data)
+    setTotalPages(response.headers["x-wp-totalpages"])
     setLoadingPosts(false)
   }
 
@@ -50,7 +52,7 @@ function NewsArchivePage({}) {
           ) : (
             <ArchiveNewsGallery
               posts={posts}
-              totalPages={1}
+              totalPages={totalPages}
               page={page}
             />
           )}
