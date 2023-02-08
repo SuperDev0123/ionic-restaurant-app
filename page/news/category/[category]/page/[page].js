@@ -21,7 +21,6 @@ function NewsArchiveCategoryPage({}) {
     }
     const response = await CapacitorHttp.request({ ...options, method: "GET" })
     setPosts(response.data)
-    console.log("***", response.data)
     setTotalPages(response.headers["x-wp-totalpages"])
     setLoadingPosts(false)
   }
