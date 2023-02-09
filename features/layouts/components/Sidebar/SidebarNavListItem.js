@@ -8,8 +8,10 @@ import ListItemButton from "@mui/material/ListItemButton"
 import ListItemText from "@mui/material/ListItemText"
 import ExpandLess from "@mui/icons-material/ExpandLess"
 import ExpandMore from "@mui/icons-material/ExpandMore"
-
 import NavLink from "@components/OurNavLink"
+
+// import { IonRouterLink } from "@ionic/react" // this breaks the app
+
 
 const CustomRouterLink = forwardRef((props, ref) => (
   <div ref={ref}>
@@ -97,8 +99,6 @@ const NewChip = styled(Chip)`
   
   span {
     font-size: 11px !important;
-    
-
   }
 `
 

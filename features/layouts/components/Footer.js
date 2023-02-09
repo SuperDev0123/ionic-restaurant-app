@@ -71,7 +71,7 @@ function Footer() {
             />
             <SocialIcons>
               <FooterLink style={{ marginTop: "1px" }}>
-                <FontAwesomeIcon icon={faDiscord} size="md" />
+                <FontAwesomeIcon icon={faDiscord}/>
               </FooterLink>
               <FooterLink href="https://twitter.com/mlbtheshowzone">
                 <TwitterIcon />
@@ -83,7 +83,7 @@ function Footer() {
                 <YouTubeIcon />
               </FooterLink>
               <FooterLink href="https://www.tiktok.com/@mlbtheshowzone" style={{ marginTop: "-3px" }}>
-                <FontAwesomeIcon icon={faTiktok} size="md" />
+                <FontAwesomeIcon icon={faTiktok}/>
               </FooterLink>
             </SocialIcons>
 

@@ -1,10 +1,12 @@
-const withPWA = require("next-pwa")
-const runtimeCaching = require("next-pwa/cache")
-
-module.exports = withPWA({
+module.exports = {
   compiler: {
     removeConsole: process.env.NODE_ENV !== "development",
   },
+  transpilePackages: [
+    "@ionic/react",
+    "@ionic/core",
+    "@stencil/core",
+  ],
   images: {
     domains: [
       "storage.googleapis.com",
@@ -20,13 +22,6 @@ module.exports = withPWA({
   images: {
     unoptimized: true,
   },
-  //   pwa: {
-  //     dest: "public",
-  //     runtimeCaching,
-  //     register: true,
-  //     skipWaiting: true,
-  //     disable: process.env.NODE_ENV === "development",
-  //   },
   async redirects() {
     return [
       {
@@ -69,4 +64,4 @@ module.exports = withPWA({
       },
     ]
   },
-})
+}
