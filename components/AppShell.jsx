@@ -57,7 +57,7 @@ const AppShell = () => {
       <Route exact path="/player/:cardId" render={() => <PlayerProfilePage />} />
       <Route exact path="/players/compare" render={() => <PlayersComparePage />} />
       <Route exact path="/players/quirks" render={() => <QuirksPage />} />
-      
+
       <Route exact path="/flipping" render={() => <FlippingPage />} />
       <Route exact path="/exchanges" render={() => <ExchangesPlayersPage />} />
 
