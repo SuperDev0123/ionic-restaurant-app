@@ -8,7 +8,7 @@ import Skeleton from "@mui/material/Skeleton"
 
 function QuirksPage() {
   const [quirks, setQuirks] = useState("")
-  const [loadingQuirks, setLoadingQuirks] = useState(false)
+  const [loadingQuirks, setLoadingQuirks] = useState(true)
 
   const getQuirks = async () => {
     setLoadingQuirks(true)

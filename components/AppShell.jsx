@@ -54,7 +54,7 @@ const AppShell = () => {
       <Route exact path="/news/:slug" render={() =><SingleNewsPage />} />
 
       <Route exact path="/players" render={() => <PlayersPage />} />
-      <Route exact path="/players/:cardId" render={() => <PlayerProfilePage />} />
+      <Route exact path="/player/:cardId" render={() => <PlayerProfilePage />} />
       <Route exact path="/players/compare" render={() => <PlayersComparePage />} />
       <Route exact path="/players/quirks" render={() => <QuirksPage />} />
       
