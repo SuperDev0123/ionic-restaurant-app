@@ -333,7 +333,7 @@ const PageHeader = ({
                 label="Attributes"
                 onClick={() => (window.location.hash = "attributes")}
               />
-              {player.marketlisting?.price_history ? (
+              {player?.marketlisting?.price_history ? (
                 <Tab
                   label="Market"
                   onClick={() => (window.location.hash = "market")}

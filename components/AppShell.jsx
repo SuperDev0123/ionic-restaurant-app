@@ -15,6 +15,7 @@ import AdvertisingPage from 'page/advertising';
 import FlippingPage from 'page/flipping';
 import ExchangesPlayersPage from 'page/exchanges';
 import PlayersPage from 'page/players';
+import PlayerProfilePage from 'page/players/[cardId]';
 import PlayersComparePage from 'page/players/compare';
 import QuirksPage from 'page/players/quirks';
 import ConquestMapsPage from 'page/conquest-maps';
@@ -53,6 +54,7 @@ const AppShell = () => {
       <Route exact path="/news/:slug" render={() =><SingleNewsPage />} />
 
       <Route exact path="/players" render={() => <PlayersPage />} />
+      <Route exact path="/players/:cardId" render={() => <PlayerProfilePage />} />
       <Route exact path="/players/compare" render={() => <PlayersComparePage />} />
       <Route exact path="/players/quirks" render={() => <QuirksPage />} />
       

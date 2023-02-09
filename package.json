@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@capacitor/android": "^4.6.2",
-    "@capacitor/core": "^4.6.2",
+    "@capacitor/core": "^4.6.3",
     "@capacitor/ios": "^4.6.2",
     "@capacitor/status-bar": "^4.1.1",
     "@emotion/css": "11.7.1",
@@ -68,6 +68,7 @@
     "qs": "^6.10.3",
     "query-string": "7.1.0",
     "react": "^18.2.0",
+    "react-apexcharts": "^1.4.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-card-flip": "^1.1.5",
     "react-chartjs-2": "^4.1.0",
@@ -88,11 +89,10 @@
     "swiper": "^8.4.5",
     "swr": "^1.2.1",
     "typewriter-effect": "^2.19.0",
-    "yup": "0.32.11",
-    "react-apexcharts": "^1.4.0"
+    "yup": "0.32.11"
   },
   "devDependencies": {
-    "@capacitor/cli": "^4.6.2",
+    "@capacitor/cli": "^4.6.3",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint": "8.7.0",
     "eslint-config-next": "^13.0.3"

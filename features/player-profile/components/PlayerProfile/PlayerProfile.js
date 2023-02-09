@@ -100,26 +100,8 @@ const PlayerProfile = ({ player }) => {
       }
     })
 
-    submitStatsToApi(updatedPlayer)
-    // call true overall api calculator
-
     setUpdatedPlayer(updatedPlayer)
     router.push(`/players/${router.query.cardId}?parallel=${ev.target.value}`)
-  }
-
-  const submitStatsToApi = player => {
-    // TODO need to check for each position
-    axios
-      .post(
-        "https://api.showzone.io/api/generate-true-overall",
-        player
-      )
-      .then(results => {
-        // setTrueOverall(results.data['True Overall Rating'])
-      })
-      .catch(err => {
-        console.log("err", err)
-      })
   }
 
   const handleChangeShields = $event => {
